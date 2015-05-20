@@ -1,0 +1,8 @@
+services:
+#    braindigit_user.example:
+#        class: Braindigit\UserBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+    braindigit_user.registration.form.type:
+        class: Braindigit\UserBundle\Form\Type\RegistrationFormType
+        tags:
+            - { name: form.type, alias: braindigit_user_registration }

@@ -1,0 +1,17 @@
+Braindigit\UserBundle\Entity\User:
+    type:  entity
+    table: fos_user
+    properties:
+        fullname:
+            - NotBlank: ~
+            - Length:
+                min: 5
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        fullname:
+            type: string
+            length: 255
