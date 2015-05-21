@@ -21,7 +21,9 @@
         "sensio/distribution-bundle": "~3.0,>=3.0.12",
         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
-        "friendsofsymfony/user-bundle": "~2.0@dev"
+        "friendsofsymfony/user-bundle": "~2.0@dev",
+        "helios-ag/fm-elfinder-bundle": "~5",
+        "egeloen/ckeditor-bundle": "~2.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
@@ -50,7 +52,8 @@
         ]
     },
     "config": {
-        "bin-dir": "bin"
+        "bin-dir": "bin",
+        "component-dir": "web/assets"
     },
     "extra": {
         "symfony-app-dir": "app",

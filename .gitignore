@@ -10,3 +10,7 @@
 /vendor/
 /web/bundles/
 .idea/
+/web/uploads/*
+!/web/uploads/.gitkeep
+/web/assets/*
+!/web/assets/.gitkeep
