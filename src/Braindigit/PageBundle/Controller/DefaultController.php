@@ -1,0 +1,48 @@
+<?php
+
+namespace Braindigit\PageBundle\Controller;
+
+use Braindigit\PageBundle\Form\Type\PageType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Braindigit\PageBundle\Entity\Page;
+
+class DefaultController extends Controller
+{
+    public function indexAction($name)
+    {
+        return $this->render('BraindigitPageBundle:Default:index.html.twig', array('name' => $name));
+    }
+
+    public function newAction(Request $request)
+    {
+        $page = new Page();
+        //$page->setTitle('Page created @ '.time());
+        //$page->setContent('Lorem ipsum dolor');
+        $page->setCreatedOn(new \DateTime());
+        //$page->setPublishedOn(new \DateTime('tomorrow'));
+        $page->setOwnerId(3);
+        $page->setStatus(1);
+        $page->setTags('');
+
+        $form = $this->createForm(new PageType(), $page, array(
+            'action' => $this->generateUrl('braindigit_page_new'),
+            'method' => 'POST',
+        ));
+
+        $form->handleRequest($request);
+        if ($form->isValid())
+        {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($page);
+            $em->flush();
+            return new Response("Page created");
+            //return $this->redirectToRoute('braindigit_page_new');
+        }
+
+        return $this->render('BraindigitPageBundle:Default:new.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+}

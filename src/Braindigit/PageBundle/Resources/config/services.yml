@@ -1,0 +1,13 @@
+services:
+#    braindigit_page.example:
+#        class: Braindigit\PageBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+parameters:
+    braindigit_page.db.table_prefix: bd_
+
+services:
+    braindigit_page.tblprefix_subscriber:
+        class: Braindigit\PageBundle\Subscriber\TablePrefixSubscriber
+        arguments: [%braindigit_page.db.table_prefix%]
+        tags:
+            - { name: doctrine.event_subscriber }

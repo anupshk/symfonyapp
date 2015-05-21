@@ -1,0 +1,7 @@
+Braindigit\PageBundle\Entity\Page:
+    properties:
+        title:
+            - NotBlank: ~
+        publishedOn:
+            - NotBlank: ~
+            - Type: \DateTime

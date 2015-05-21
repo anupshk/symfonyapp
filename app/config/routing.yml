@@ -1,3 +1,7 @@
+braindigit_page:
+    resource: "@BraindigitPageBundle/Resources/config/routing.yml"
+    prefix:   /
+
 braindigit_user:
     resource: "@BraindigitUserBundle/Resources/config/routing.yml"
     prefix:   /

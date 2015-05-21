@@ -13,7 +13,7 @@ framework:
         strict_requirements: ~
     form:            ~
     csrf_protection: ~
-    validation:      { enable_annotations: true }
+    validation:      { enabled:true, enable_annotations: true }
     templating:
         engines: ['twig']
         #assets_version: SomeVersionScheme
@@ -102,3 +102,45 @@ fm_elfinder:
                         upload_allow: ['image/png', 'image/jpg', 'image/jpeg']
                         upload_deny: ['all']
                         upload_max_size: 2M
+        ckeditor:
+            locale: %locale% # defaults to current request locale
+            editor: ckeditor # other options are tinymce, tinymce4, form, custom and simple
+            fullscreen: true # defaults true, applies to simple and ckeditor editors
+            theme: smoothness # jquery theme
+            include_assets: true # disable if you want to handle loading of the javascript and css assets yourself
+            connector:
+                debug: false # defaults to false
+                roots:       # at least one root must be defined
+                    uploads:
+                        show_hidden: false # defaults to false
+                        driver: LocalFileSystem
+                        path: uploads
+                        upload_allow: ['image/png', 'image/jpg', 'image/jpeg']
+                        upload_deny: ['all']
+                        upload_max_size: 2M
+        form:
+            locale: %locale% # defaults to current request locale
+            editor: form # other choices are tinymce or simple, and form
+            #show_hidden: false # defaults to false
+            fullscreen: true # defaults true, applies to simple and ckeditor editors
+            include_assets: true # disable if you want to handle loading of the javascript and css assets yourself
+            #compression: false # enable if you configured the uglifycss and uglifyjs2 assetic filters and want compression
+            connector:
+                debug: false # defaults to false
+                roots:       # at least one root must be defined
+                    uploads:
+                        driver: LocalFileSystem
+                        path: uploads
+                        upload_allow: ['image/png', 'image/jpg', 'image/jpeg']
+                        upload_deny: ['all']
+                        upload_max_size: 2M
+
+ivory_ck_editor:
+    autoload: false # to prevent multiple loading of ckeditor.js, include required js in view
+    default_config: default
+    configs:
+        default:
+            toolbar: standard
+            filebrowserBrowseRoute: elfinder
+            filebrowserBrowseRouteParameters:
+                instance: ckeditor

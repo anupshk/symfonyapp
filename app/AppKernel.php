@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new Braindigit\UserBundle\BraindigitUserBundle(),
             new FM\ElfinderBundle\FMElfinderBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new Braindigit\PageBundle\BraindigitPageBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

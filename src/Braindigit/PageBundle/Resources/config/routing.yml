@@ -1,0 +1,7 @@
+braindigit_page_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: BraindigitPageBundle:Default:index }
+
+braindigit_page_new:
+    path:      /page/new
+    defaults:  { _controller: BraindigitPageBundle:Default:new }
