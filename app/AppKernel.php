@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new FM\ElfinderBundle\FMElfinderBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new Braindigit\PageBundle\BraindigitPageBundle(),
+            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

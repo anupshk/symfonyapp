@@ -23,7 +23,9 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "helios-ag/fm-elfinder-bundle": "~5",
-        "egeloen/ckeditor-bundle": "~2.0"
+        "egeloen/ckeditor-bundle": "~2.0",
+        "doctrine/migrations": "1.0.*@dev",
+        "doctrine/doctrine-migrations-bundle": "1.0.*"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
