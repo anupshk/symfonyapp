@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Braindigit\PageBundle\Entity\Page;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class DefaultController extends Controller
 {
@@ -17,6 +18,7 @@ class DefaultController extends Controller
 
     public function newAction(Request $request)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $page = new Page();
         //$page->setTitle('Page created @ '.time());
         //$page->setContent('Lorem ipsum dolor');
