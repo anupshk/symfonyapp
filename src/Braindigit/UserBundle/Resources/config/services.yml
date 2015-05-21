@@ -6,3 +6,9 @@ services:
         class: Braindigit\UserBundle\Form\Type\RegistrationFormType
         tags:
             - { name: form.type, alias: braindigit_user_registration }
+
+    braindigit_user.user_creation:
+        class: Braindigit\UserBundle\EventListener\UserCreationListener
+        tags:
+            - { name: kernel.event_subscriber, alias: braindigit_user_creation_listener }
+        arguments: [@doctrine.orm.entity_manager]

@@ -78,6 +78,8 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: Braindigit\UserBundle\Entity\User
+    group:
+        group_class: Braindigit\UserBundle\Entity\Group
     registration:
         form:
             type: braindigit_user_registration
