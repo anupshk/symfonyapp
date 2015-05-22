@@ -25,7 +25,10 @@
         "helios-ag/fm-elfinder-bundle": "~5",
         "egeloen/ckeditor-bundle": "~2.0",
         "doctrine/migrations": "1.0.*@dev",
-        "doctrine/doctrine-migrations-bundle": "1.0.*"
+        "doctrine/doctrine-migrations-bundle": "1.0.*",
+        "liip/theme-bundle": "dev-master",
+        "stof/doctrine-extensions-bundle": "~1.1@dev",
+        "friendsofsymfony/jsrouting-bundle": "^1.5"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
