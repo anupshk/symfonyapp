@@ -18,13 +18,13 @@ class DefaultController extends Controller
 
     public function newAction(Request $request)
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $page = new Page();
         //$page->setTitle('Page created @ '.time());
         //$page->setContent('Lorem ipsum dolor');
-        $page->setCreatedOn(new \DateTime());
-        //$page->setPublishedOn(new \DateTime('tomorrow'));
-        $page->setOwnerId(3);
+        $page->setCreatedOn(new \DateTime('now'));
+        $page->setPublishedOn(new \DateTime('now'));
+        $page->setOwnerId($this->getUser()->getId());
         $page->setStatus(1);
         $page->setTags('');
 
