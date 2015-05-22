@@ -1,7 +1,167 @@
-CREATE TABLE fos_user (id INT AUTO_INCREMENT NOT NULL, username VARCHAR(255) NOT NULL, username_canonical VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, email_canonical VARCHAR(255) NOT NULL, enabled TINYINT(1) NOT NULL, salt VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, last_login DATETIME DEFAULT NULL, locked TINYINT(1) NOT NULL, expired TINYINT(1) NOT NULL, expires_at DATETIME DEFAULT NULL, confirmation_token VARCHAR(255) DEFAULT NULL, password_requested_at DATETIME DEFAULT NULL, roles LONGTEXT NOT NULL COMMENT '(DC2Type:array)', credentials_expired TINYINT(1) NOT NULL, credentials_expire_at DATETIME DEFAULT NULL, fullname VARCHAR(255) NOT NULL, UNIQUE INDEX UNIQ_957A647992FC23A8 (username_canonical), UNIQUE INDEX UNIQ_957A6479A0D96FBF (email_canonical), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB;
-CREATE TABLE fos_user_group (user_id INT NOT NULL, group_id INT NOT NULL, INDEX IDX_583D1F3EA76ED395 (user_id), INDEX IDX_583D1F3EFE54D947 (group_id), PRIMARY KEY(user_id, group_id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB;
-CREATE TABLE fos_group (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, roles LONGTEXT NOT NULL COMMENT '(DC2Type:array)', UNIQUE INDEX UNIQ_4B019DDB5E237E06 (name), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB;
-CREATE TABLE bd_page (id INT AUTO_INCREMENT NOT NULL, title VARCHAR(255) NOT NULL, content LONGTEXT NOT NULL, tags VARCHAR(255) NOT NULL, image VARCHAR(255) NOT NULL, status TINYINT(1) NOT NULL, owner_id INT NOT NULL, published_on DATETIME NOT NULL, created_on DATE NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB;
-CREATE TABLE elfinder_file (id INT AUTO_INCREMENT NOT NULL, parent_id INT NOT NULL, name VARCHAR(255) NOT NULL, content LONGBLOB NOT NULL, size INT NOT NULL, mtime INT NOT NULL, mime VARCHAR(255) NOT NULL, `read` VARCHAR(255) NOT NULL, `write` VARCHAR(255) NOT NULL, locked VARCHAR(255) NOT NULL, hidden VARCHAR(255) NOT NULL, width INT NOT NULL, height INT NOT NULL, INDEX parent_id (parent_id), UNIQUE INDEX parent_name (parent_id, name), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB;
-ALTER TABLE fos_user_group ADD CONSTRAINT FK_583D1F3EA76ED395 FOREIGN KEY (user_id) REFERENCES fos_user (id);
-ALTER TABLE fos_user_group ADD CONSTRAINT FK_583D1F3EFE54D947 FOREIGN KEY (group_id) REFERENCES fos_group (id);
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bd_page`
+--
+
+CREATE TABLE IF NOT EXISTS `bd_page` (
+`id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `content` text NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `tags` varchar(255) NOT NULL,
+  `status` tinyint(4) NOT NULL,
+  `owner_id` int(11) NOT NULL,
+  `published_on` datetime NOT NULL,
+  `created_on` date NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fos_group`
+--
+
+CREATE TABLE IF NOT EXISTS `fos_group` (
+`id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `roles` longtext COLLATE utf8_unicode_ci NOT NULL COMMENT '(DC2Type:array)'
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fos_user`
+--
+
+CREATE TABLE IF NOT EXISTS `fos_user` (
+`id` int(11) NOT NULL,
+  `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `username_canonical` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email_canonical` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `enabled` tinyint(1) NOT NULL,
+  `salt` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `last_login` datetime DEFAULT NULL,
+  `locked` tinyint(1) NOT NULL,
+  `expired` tinyint(1) NOT NULL,
+  `expires_at` datetime DEFAULT NULL,
+  `confirmation_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `password_requested_at` datetime DEFAULT NULL,
+  `roles` longtext COLLATE utf8_unicode_ci NOT NULL COMMENT '(DC2Type:array)',
+  `credentials_expired` tinyint(1) NOT NULL,
+  `credentials_expire_at` datetime DEFAULT NULL,
+  `fullname` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `fos_user`
+--
+
+INSERT INTO `fos_user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `locked`, `expired`, `expires_at`, `confirmation_token`, `password_requested_at`, `roles`, `credentials_expired`, `credentials_expire_at`, `fullname`) VALUES
+(1, 'admin', 'admin', 'admin@hotmail.com', 'admin@hotmail.com', 1, '5q068g33be888s8wggo4w08w0sso8gw', 'ZBpdWDZrwR1V4QV/dF9e5UI4ZPPgBB6zCPwVv2QutoWyiSuG/iYphf/nTgVrJOmQo7/5HxoWK6twiFGjmKoPyw==', '2015-05-21 15:30:36', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:10:"ROLE_ADMIN";}', 0, NULL, 'Admin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fos_user_group`
+--
+
+CREATE TABLE IF NOT EXISTS `fos_user_group` (
+  `user_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `migration_versions`
+--
+
+CREATE TABLE IF NOT EXISTS `migration_versions` (
+  `version` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sessions`
+--
+
+CREATE TABLE IF NOT EXISTS `sessions` (
+  `sess_id` varbinary(128) NOT NULL,
+  `sess_data` blob NOT NULL,
+  `sess_time` int(10) unsigned NOT NULL,
+  `sess_lifetime` mediumint(9) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `bd_page`
+--
+ALTER TABLE `bd_page`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `fos_group`
+--
+ALTER TABLE `fos_group`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `UNIQ_4B019DDB5E237E06` (`name`);
+
+--
+-- Indexes for table `fos_user`
+--
+ALTER TABLE `fos_user`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `UNIQ_957A647992FC23A8` (`username_canonical`), ADD UNIQUE KEY `UNIQ_957A6479A0D96FBF` (`email_canonical`);
+
+--
+-- Indexes for table `fos_user_group`
+--
+ALTER TABLE `fos_user_group`
+ ADD PRIMARY KEY (`user_id`,`group_id`), ADD KEY `IDX_583D1F3EA76ED395` (`user_id`), ADD KEY `IDX_583D1F3EFE54D947` (`group_id`);
+
+--
+-- Indexes for table `migration_versions`
+--
+ALTER TABLE `migration_versions`
+ ADD PRIMARY KEY (`version`);
+
+--
+-- Indexes for table `sessions`
+--
+ALTER TABLE `sessions`
+ ADD PRIMARY KEY (`sess_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `bd_page`
+--
+ALTER TABLE `bd_page`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `fos_group`
+--
+ALTER TABLE `fos_group`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `fos_user`
+--
+ALTER TABLE `fos_user`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `fos_user_group`
+--
+ALTER TABLE `fos_user_group`
+ADD CONSTRAINT `FK_583D1F3EA76ED395` FOREIGN KEY (`user_id`) REFERENCES `fos_user` (`id`),
+ADD CONSTRAINT `FK_583D1F3EFE54D947` FOREIGN KEY (`group_id`) REFERENCES `fos_group` (`id`);
