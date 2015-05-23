@@ -19,3 +19,6 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
     default_timezone:  'Asia/Kathmandu'
+    application_name: 'Symfony Practice Application'
+    application_shortname: 'SPA'
+    application_version: 'version 0.0.1'

@@ -28,7 +28,12 @@
         "doctrine/doctrine-migrations-bundle": "1.0.*",
         "liip/theme-bundle": "dev-master",
         "stof/doctrine-extensions-bundle": "~1.1@dev",
-        "friendsofsymfony/jsrouting-bundle": "^1.5"
+        "friendsofsymfony/jsrouting-bundle": "^1.5",
+        "jms/serializer-bundle": "^0.13.0",
+        "friendsofsymfony/rest-bundle": "^1.6",
+        "jms/di-extra-bundle": "^1.5",
+        "oldsound/rabbitmq-bundle": "1.*",
+        "liuggio/excelbundle": "^2.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

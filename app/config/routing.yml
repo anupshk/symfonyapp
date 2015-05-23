@@ -20,6 +20,10 @@ fos_user_group:
 elfinder:
      resource: "@FMElfinderBundle/Resources/config/routing.yml"
 
+liip_theme:
+    resource: "@LiipThemeBundle/Resources/config/routing.xml"
+    prefix: /theme
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation

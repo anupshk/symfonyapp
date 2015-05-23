@@ -31,6 +31,10 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+        application_name: "%application_name%"
+        application_version: "%application_version%"
+        application_shortname: "%application_shortname%"
 
 # Assetic Configuration
 assetic:
@@ -151,3 +155,22 @@ doctrine_migrations:
     namespace: Application\Migrations
     table_name: migration_versions
     name: Application Migrations
+
+liip_theme:
+    themes: ['practice']
+    active_theme: 'practice'
+    load_controllers: false
+    assetic_integration: true
+    path_patterns:
+        app_resource:
+            - %%app_path%%/themes/%%current_theme%%/%%template%%
+            - %%app_path%%/themes/fallback_theme/%%template%%
+            - %%app_path%%/views/%%template%%
+        bundle_resource:
+            - %%bundle_path%%/Resources/themes/%%current_theme%%_%%current_device%%/%%template%%
+            - %%bundle_path%%/Resources/themes/%%current_theme%%/%%template%%
+            - %%bundle_path%%/Resources/themes/fallback_theme/%%template%%
+        bundle_resource_dir:
+            - %%dir%%/themes/%%current_theme%%/%%bundle_name%%/%%template%%
+            - %%dir%%/themes/fallback_theme/%%bundle_name%%/%%template%%
+            - %%dir%%/%%bundle_name%%/%%override_path%%

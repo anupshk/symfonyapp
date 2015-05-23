@@ -13,3 +13,6 @@ parameters:
     locale: en
     secret: e0ea972deb647bce28310a6fdf834a46
     default_timezone: 'Asia/Kathmandu'
+    application_name: 'Symfony Practice Application'
+    application_shortname: 'SPA'
+    application_version: 'version 0.0.1'
