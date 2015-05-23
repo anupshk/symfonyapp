@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{{ application_name }} | {{ application_version }} | Log in</title>
+    <title>{{ application_name }} | {{ application_version }} | {% block title %}Welcome{% endblock %}</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
     <link href="{{ asset('/adminlte/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />

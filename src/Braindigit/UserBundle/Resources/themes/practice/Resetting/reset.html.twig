@@ -1,0 +1,5 @@
+{% extends "BraindigitUserBundle::outlayout.html.twig" %}
+{% block title %}{{ 'resetting.reset.title'|trans({}, 'FOSUserBundle') }}{% endblock %}
+{% block fos_user_content %}
+{% include "BraindigitUserBundle:Resetting:reset_content.html.twig" %}
+{% endblock fos_user_content %}

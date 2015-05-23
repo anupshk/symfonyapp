@@ -1,0 +1,10 @@
+{% extends "BraindigitUserBundle::outlayout.html.twig" %}
+{% block title %}{{ 'resetting.request.title'|trans({}, 'FOSUserBundle') }}{% endblock %}
+{% block fos_user_content %}
+    <div class="login-box">
+        <div class="login-box-body">
+            <p class="callout callout-success">{{ 'resetting.check_email'|trans({'%email%': email}, 'FOSUserBundle') }}</p>
+            <a href="{{ path('fos_user_security_login') }}">Go to Login</a><br>
+        </div>
+    </div>
+{% endblock %}

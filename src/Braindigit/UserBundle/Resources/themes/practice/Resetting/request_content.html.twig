@@ -1,0 +1,21 @@
+<div class="login-box">
+    <div class="login-box-body">
+        {% if invalid_username is defined %}
+            <p class="callout callout-danger">{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}, 'FOSUserBundle') }}</p>
+        {% endif %}
+
+        <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+
+            <div class="form-group has-feedback">
+                <input type="text" id="username" required="required" name="username" class="form-control" placeholder="{{ 'resetting.request.username'|trans({}, 'FOSUserBundle') }}"/>
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <div class="col-xs-8">
+                    <button type="submit" id="submit" name="submit" class="btn btn-primary btn-block btn-flat">{{ 'resetting.request.submit'|trans({}, 'FOSUserBundle') }}</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
