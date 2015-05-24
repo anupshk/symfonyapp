@@ -1,10 +1,30 @@
 <div class="login-box">
     <div class="login-box-body">
+        {% if form_errors(form.plainPassword.first) %}
+            <div class="callout callout-danger">
+                {{ form_errors(form.plainPassword.first) }}
+            </div>
+        {% endif %}
+        {% if form_errors(form.plainPassword.second) %}
+            <div class="callout callout-danger">
+                {{ form_errors(form.plainPassword.second) }}
+            </div>
+        {% endif %}
         <form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST"
               class="fos_user_resetting_reset">
-            {{ form_widget(form) }}
-            <div>
-                <input type="submit" value="{{ 'resetting.reset.submit'|trans({}, 'FOSUserBundle') }}"/>
+            {{ form_row(form._token) }}
+            <div class="form-group has-feedback">
+                {{ form_widget(form.plainPassword.first, { 'attr': { 'class': 'form-control', 'placeholder': 'form.new_password'|trans({}, 'FOSUserBundle') } }) }}
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                {{ form_widget(form.plainPassword.second, { 'attr': { 'class': 'form-control', 'placeholder': 'form.new_password_confirmation'|trans({}, 'FOSUserBundle') } }) }}
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <div class="col-xs-8">
+                    <button type="submit" id="submit" name="submit" class="btn btn-primary btn-block btn-flat">{{ 'resetting.reset.submit'|trans({}, 'FOSUserBundle') }}</button>
+                </div>
             </div>
         </form>
     </div>
