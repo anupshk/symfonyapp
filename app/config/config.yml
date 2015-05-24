@@ -83,6 +83,11 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: Braindigit\UserBundle\Entity\User
+    resetting:
+        email:
+            from_email:
+                address: noreply@symfonyapps.com
+                sender_name: Symfony Apps
     group:
         group_class: Braindigit\UserBundle\Entity\Group
     registration:
