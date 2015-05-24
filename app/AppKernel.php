@@ -35,6 +35,9 @@ class AppKernel extends Kernel
             new FOS\RestBundle\FOSRestBundle(),
             new Liuggio\ExcelBundle\LiuggioExcelBundle(),
             new Liip\ThemeBundle\LiipThemeBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new Braindigit\CategoryBundle\BraindigitCategoryBundle(),
+            new Braindigit\EventBundle\BraindigitEventBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

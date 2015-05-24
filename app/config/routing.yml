@@ -1,3 +1,11 @@
+braindigit_event:
+    resource: "@BraindigitEventBundle/Resources/config/routing.yml"
+    prefix:   /
+
+braindigit_category:
+    resource: "@BraindigitCategoryBundle/Resources/config/routing.yml"
+    prefix:   /
+
 braindigit_page:
     resource: "@BraindigitPageBundle/Resources/config/routing.yml"
     prefix:   /
