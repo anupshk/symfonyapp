@@ -38,6 +38,7 @@ change_password:
 
 # Registration
 registration:
+    title: Registration
     check_email: An email has been sent to %email%. It contains an activation link you must click to activate your account.
     confirmed: Congrats %username%, your account is now activated.
     back: Back to the originating page.
@@ -88,10 +89,11 @@ layout:
 # Form field labels
 form:
     group_name: "Group name:"
-    username: "Username:"
-    email: "Email:"
-    current_password: "Current password:"
-    password: "Password:"
-    password_confirmation: "Repeat password:"
+    fullname: "Full name"
+    username: "Username"
+    email: "Email"
+    current_password: "Current password"
+    password: "Password"
+    password_confirmation: "Repeat password"
     new_password: "New password"
     new_password_confirmation: "Repeat new password"

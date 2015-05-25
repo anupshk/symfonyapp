@@ -20,7 +20,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body class="login-page">
+<body class="{% block body_class %}login-page{% endblock %}">
 {% block fos_user_content %}
 {% endblock fos_user_content %}
 <!-- jQuery 2.1.4 -->

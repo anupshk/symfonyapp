@@ -1,0 +1,6 @@
+{% extends 'BraindigitUserBundle::outlayout.html.twig' %}
+{% block title %}{{ 'registration.title'|trans({}, 'FOSUserBundle') }}{% endblock %}
+{% block body_class %}register-page{% endblock %}
+{% block fos_user_content %}
+{% include "BraindigitUserBundle:Registration:register_content.html.twig" %}
+{% endblock fos_user_content %}
