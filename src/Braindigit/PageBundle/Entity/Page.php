@@ -248,4 +248,9 @@ class Page
     {
         return $this->createdOn;
     }
+
+    public function setCreatedAtValue()
+    {
+        $this->createdOn = new \DateTime('now');
+    }
 }

@@ -1,4 +1,4 @@
-services:
+#services:
 #    braindigit_page.example:
 #        class: Braindigit\PageBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
@@ -11,3 +11,13 @@ services:
         arguments: [%braindigit_page.db.table_prefix%]
         tags:
             - { name: doctrine.event_subscriber }
+    sonata.admin.post:
+        class: Braindigit\PageBundle\Admin\PageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Page" }
+        arguments:
+            - ~
+            - Braindigit\PageBundle\Entity\Page
+            - ~
+        calls:
+            - [ setTranslationDomain, [BraindigitPageBundle]]

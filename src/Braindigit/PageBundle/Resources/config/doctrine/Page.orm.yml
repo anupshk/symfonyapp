@@ -55,4 +55,5 @@ Braindigit\PageBundle\Entity\Page:
             nullable: false
             comment: ''
             column: created_on
-    lifecycleCallbacks: {  }
+    lifecycleCallbacks:
+        prePersist: [ setCreatedAtValue ]
