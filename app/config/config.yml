@@ -111,6 +111,9 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: Braindigit\UserBundle\Entity\User
+    from_email:
+        address: admin@symfonyapps.com
+        sender_name: Symfony Apps
     resetting:
         email:
             from_email:
@@ -119,6 +122,8 @@ fos_user:
     group:
         group_class: Braindigit\UserBundle\Entity\Group
     registration:
+        confirmation:
+            enabled: true
         form:
             type: braindigit_user_registration
 
