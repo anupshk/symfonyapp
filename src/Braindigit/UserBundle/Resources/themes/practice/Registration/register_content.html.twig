@@ -1,32 +1,37 @@
+{% form_theme form 'BraindigitUserBundle:Form:form_errors.html.twig' %}
 {% block fos_user_content %}
     <div class="register-box">
         <div class="register-logo">
             <a href="{{ path('fos_user_registration_register') }}">{{ application_shortname }} Registration</a>
         </div>
         <div class="register-box-body">
-            {{ form_errors(form) }}
-            <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST"
+            <form novalidate="novalidate" action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST"
                   class="fos_user_registration_register">
                 {{ form_row(form._token) }}
-                <div class="form-group has-feedback">
+                <div class="form-group has-feedback{% if form.fullname.vars.errors|length %} has-error{% endif %}">
                     {{ form_widget(form.fullname, { 'attr': { 'class': 'form-control', 'placeholder': 'form.fullname'|trans({}, 'FOSUserBundle') } }) }}
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    {{ form_errors(form.fullname) }}
                 </div>
-                <div class="form-group has-feedback">
+                <div class="form-group has-feedback{% if form.username.vars.errors|length %} has-error{% endif %}">
                     {{ form_widget(form.username, { 'attr': { 'class': 'form-control', 'placeholder': 'form.username'|trans({}, 'FOSUserBundle') } }) }}
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    {{ form_errors(form.username) }}
                 </div>
-                <div class="form-group has-feedback">
+                <div class="form-group has-feedback{% if form.email.vars.errors|length %} has-error{% endif %}">
                     {{ form_widget(form.email, { 'attr': { 'class': 'form-control', 'placeholder': 'form.email'|trans({}, 'FOSUserBundle') } }) }}
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    {{ form_errors(form.email) }}
                 </div>
-                <div class="form-group has-feedback">
+                <div class="form-group has-feedback{% if form.plainPassword.first.vars.errors|length %} has-error{% endif %}">
                     {{ form_widget(form.plainPassword.first, { 'attr': { 'class': 'form-control', 'placeholder': 'form.password'|trans({}, 'FOSUserBundle') } }) }}
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    {{ form_errors(form.plainPassword.first) }}
                 </div>
-                <div class="form-group has-feedback">
+                <div class="form-group has-feedback{% if form.plainPassword.second.vars.errors|length %} has-error{% endif %}">
                     {{ form_widget(form.plainPassword.second, { 'attr': { 'class': 'form-control', 'placeholder': 'form.password_confirmation'|trans({}, 'FOSUserBundle') } }) }}
                     <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                    {{ form_errors(form.plainPassword.second) }}
                 </div>
                 <div class="row">
                     <div class="col-xs-8">
