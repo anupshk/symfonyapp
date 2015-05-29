@@ -1,17 +1,79 @@
 {% extends '::layout.html.twig' %}
 {% block title %}Users{% endblock %}
+{% block page_header %}Users{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('/adminlte/plugins/datatables/dataTables.bootstrap.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
 {% block main_content %}
-    <div class="count">
-        {{ pagination.getTotalItemCount }}
-    </div>
+
+    <div class="box">
+        <div class="box-body">
+            <div id="userlist_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div id="example1_length" class="dataTables_length">
+                            <label>Show <select class="form-control input-sm" aria-controls="example1" name="example1_length">
+                                    <option value="10">10</option><option value="25">25</option><option value="50">50</option>
+                                    <option value="100">100</option></select> entries
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="dataTables_filter" id="example1_filter">
+                            <label>Search:<input aria-controls="example1" placeholder="" class="form-control input-sm" type="search">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table id="usersList" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>{{ knp_pagination_sortable(pagination, 'Id', 'id') }}</th>
+                                <th{% if pagination.isSorted('fullname') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Name', 'fullname') }}</th>
+                                <th{% if pagination.isSorted('username') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Username', 'username') }}</th>
+                                <th{% if pagination.isSorted('email') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Email', 'email') }}</th>
+                                <th{% if pagination.isSorted('lastLogin') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Last login', 'lastLogin') }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for user in pagination %}
+                                <tr>
+                                    <td>{{ user.id }}</td>
+                                    <td>{{ user.fullname }}</td>
+                                    <td>{{ user.username }}</td>
+                                    <td>{{ user.email }}</td>
+                                    <td>{% if user.lastLogin is not null %}{{ user.lastLogin|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-5">
+                        <div aria-live="polite" role="status" id="userlist_info" class="dataTables_info">
+                            Total : {{ pagination.getTotalItemCount }}
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="dataTables_paginate paging_simple_numbers" id="userlist_paginate">
+                            {{ knp_pagination_render(pagination) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.box-body -->
+    </div><!-- /.box -->
+
+    {#
     <table>
         <tr>
-            {# sorting of properties based on query components #}
             <th>{{ knp_pagination_sortable(pagination, 'Id', 'a.id') }}</th>
             <th{% if pagination.isSorted('a.Title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Title', 'a.title') }}</th>
         </tr>
-
-        {# table body #}
         {% for user in pagination %}
             <tr {% if loop.index is odd %}class="color"{% endif %}>
                 <td>{{ user.id }}</td>
@@ -19,8 +81,6 @@
             </tr>
         {% endfor %}
     </table>
+    #}
     {# display navigation #}
-    <div class="navigation">
-        {{ knp_pagination_render(pagination) }}
-    </div>
 {% endblock %}

@@ -16,3 +16,6 @@ parameters:
     application_name: 'Symfony Practice Application'
     application_shortname: 'SPA'
     application_version: 'version 0.0.1'
+    query_param_sort: sort
+    query_param_direction: direction
+    query_param_page: page
