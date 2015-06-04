@@ -8,12 +8,34 @@ class UserController extends Controller
 {
     public function indexAction(Request $request)
     {
-        $userManager = $this->container->get('fos_user.user_manager');
+        /*$userManager = $this->container->get('fos_user.user_manager');
         $userManager->setDefaultOptions(array(
             'sortField' => $request->query->getAlpha($this->container->getParameter('query_param_sort'), 'id'),
             'sortDirection' => $request->query->getAlpha($this->container->getParameter('query_param_direction'), 'DESC'),
         ));
-        $users = $userManager->findAllUsers();
+        $users = $userManager->findAllUsers();*/
+
+        $criteria = [];
+        /*$criteria = [
+            [
+                'field' => 'fullname',
+                'operator' => 'contains',
+                'value' => 'min'
+            ]
+        ];*/
+        /*$orderings = [
+            ['field' => 'fullname', 'order' => 'ASC'],
+            ['field' => 'id', 'order' => 'DESC'],
+        ];*/
+        $orderings = [
+            [
+                'field' => $request->query->getAlpha($this->container->getParameter('query_param_sort'), 'id'),
+                'order' => $request->query->getAlpha($this->container->getParameter('query_param_direction'), 'DESC')
+            ]
+        ];
+        $limit = null;
+        $offset = null;
+        $users = $this->getDoctrine()->getRepository('BraindigitUserBundle:User')->findAllUsers($criteria, $orderings, $limit, $offset);
 
         $paginator  = $this->get('knp_paginator');
 
