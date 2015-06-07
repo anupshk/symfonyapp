@@ -39,6 +39,7 @@ class AppKernel extends Kernel
             new Braindigit\CategoryBundle\BraindigitCategoryBundle(),
             new Braindigit\EventBundle\BraindigitEventBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new Liip\ImagineBundle\LiipImagineBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
