@@ -1,0 +1,18 @@
+Braindigit\PageBundle\Entity\Comment:
+    type: entity
+    changeTrackingPolicy: DEFERRED_EXPLICIT
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    manyToOne:
+            thread:
+                targetEntity: Braindigit\PageBundle\Entity\Thread
+                inversedBy: comments
+
+    lifecycleCallbacks: {  }

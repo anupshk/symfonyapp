@@ -5,3 +5,7 @@ braindigit_page_homepage:
 braindigit_page_new:
     path:      /page/new
     defaults:  { _controller: BraindigitPageBundle:Default:new }
+
+braindigit_test_comment:
+    path:      /page/testcomment
+    defaults:  { _controller: BraindigitPageBundle:Default:testcomment }

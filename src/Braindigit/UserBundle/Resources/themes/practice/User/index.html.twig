@@ -3,7 +3,18 @@
 {% block page_header %}Users{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
-    <link href="{{ asset('/adminlte/plugins/datatables/dataTables.bootstrap.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/adminlte/plugins/bootgrid/jquery.bootgrid.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <!-- datatables -->
+    <script src="{{ asset('/adminlte/plugins/bootgrid/jquery.bootgrid.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/adminlte/plugins/bootgrid/jquery.bootgrid.fa.min.js') }}" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#usersList").bootgrid();
+        });
+    </script>
 {% endblock %}
 {% block main_content %}
 
@@ -14,8 +25,11 @@
                     <div class="col-sm-6">
                         <div id="example1_length" class="dataTables_length">
                             <label>Show <select class="form-control input-sm" aria-controls="example1" name="example1_length">
-                                    <option value="10">10</option><option value="25">25</option><option value="50">50</option>
-                                    <option value="100">100</option></select> entries
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select> entries
                             </label>
                         </div>
                     </div>
@@ -32,10 +46,11 @@
                             <thead>
                             <tr>
                                 <th>{{ knp_pagination_sortable(pagination, 'Id', 'id') }}</th>
-                                <th{% if pagination.isSorted('fullname') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Name', 'fullname') }}</th>
-                                <th{% if pagination.isSorted('username') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Username', 'username') }}</th>
-                                <th{% if pagination.isSorted('email') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Email', 'email') }}</th>
-                                <th{% if pagination.isSorted('lastLogin') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Last login', 'lastLogin') }}</th>
+                                {% set direction = pagination.getDirection() %}
+                                <th{% if pagination.isSorted('fullname') %} class="sorted {{ direction }}"{% endif %}>{{ knp_pagination_sortable(pagination, 'Name', 'fullname') }}</th>
+                                <th{% if pagination.isSorted('username') %} class="sorted {{ direction }}"{% endif %}>{{ knp_pagination_sortable(pagination, 'Username', 'username') }}</th>
+                                <th{% if pagination.isSorted('email') %} class="sorted {{ direction }}"{% endif %}>{{ knp_pagination_sortable(pagination, 'Email', 'email') }}</th>
+                                <th{% if pagination.isSorted('lastLogin') %} class="sorted {{ direction }}"{% endif %}>{{ knp_pagination_sortable(pagination, 'Last login', 'lastLogin') }}</th>
                             </tr>
                             </thead>
                             <tbody>

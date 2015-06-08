@@ -1,0 +1,8 @@
+Braindigit\PageBundle\Entity\Thread:
+    type: entity
+    changeTrackingPolicy: DEFERRED_EXPLICIT
+    id:
+        id:
+            type: string
+            id: true
+    lifecycleCallbacks: {  }
