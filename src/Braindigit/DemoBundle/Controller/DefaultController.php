@@ -9,9 +9,9 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $name = "Anonymous user";
-        if ($this->get('security.context')->isGranted('ROLE_ADMIN')) {
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             $name = "Admin user : ".$this->getUser()->getFullname();
-        } else if($this->get('security.context')->isGranted('ROLE_USER')) {
+        } else if($this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             $name = "Registered user : ".$this->getUser()->getFullname();
         }
         //die("timezone ".date_default_timezone_get());

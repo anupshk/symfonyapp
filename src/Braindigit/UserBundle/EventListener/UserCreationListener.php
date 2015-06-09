@@ -31,6 +31,7 @@ class UserCreationListener implements EventSubscriberInterface
 
     public function onRegistrationSuccess(FormEvent $event)
     {
+        return;
         //$roles = array('ROLE_ADMIN');
         $this->user = $event->getForm()->getData();
         $group_name = 'Manager';
