@@ -14,7 +14,7 @@ class UserController extends Controller
         $list_data['sort_field'] = 'id';
         $list_data['sort_direction'] = 'ASC';
 
-        $list_data['rpp'] = 2;
+        $list_data['rpp'] = 10;
         $rpp = $session->get('user.list.rpp', $list_data['rpp']);
         /*$userManager = $this->container->get('fos_user.user_manager');
         $userManager->setDefaultOptions(array(
@@ -38,7 +38,7 @@ class UserController extends Controller
         $orderings = [
             [
                 'field' => $request->query->getAlpha($this->container->getParameter('query_param_sort'), 'id'),
-                'order' => $request->query->getAlpha($this->container->getParameter('query_param_direction'), 'DESC')
+                'order' => $request->query->getAlpha($this->container->getParameter('query_param_direction'), 'desc')
             ]
         ];
         $limit = null;
@@ -50,7 +50,11 @@ class UserController extends Controller
         $pagination = $paginator->paginate(
             $users,
             $request->query->getInt('page', 1),
-            $request->query->getInt('rpp', $rpp)
+            $request->query->getInt('rpp', $rpp),
+            array(
+                'defaultSortFieldName' => $orderings[0]['field'],
+                'defaultSortDirection' => $orderings[0]['order']
+            )
         );
         return $this->render('BraindigitUserBundle:User:index.html.twig', array(
             'pagination' => $pagination,
