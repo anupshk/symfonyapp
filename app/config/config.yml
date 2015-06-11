@@ -35,6 +35,8 @@ twig:
         application_name: "%application_name%"
         application_version: "%application_version%"
         application_shortname: "%application_shortname%"
+        query_param_sort: "%query_param_sort%"
+        query_param_direction: "%query_param_direction%"
 
 # Assetic Configuration
 assetic:

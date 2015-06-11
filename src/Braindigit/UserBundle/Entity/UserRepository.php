@@ -13,6 +13,8 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRepository extends EntityRepository
 {
+    private $sortFields = ['id', 'fullname', 'username', 'email', 'lastLogin'];
+    private $sortOrders = ['desc', 'asc'];
     /**
      * example:
      * $conditions = array(
@@ -52,13 +54,107 @@ class UserRepository extends EntityRepository
         }
         if(count($conditions) > 0) {
             $expr = Criteria::expr();
-            foreach($conditions as $condition) {
-                if(!is_array($condition) || count($condition) != 3) {
-                    continue;
+            foreach($conditions as $x => $condition_arr) {
+                if(count($condition_arr) > 0) {
+                    foreach($condition_arr as $condition) {
+                        if (!is_array($condition) || count($condition) != 3) {
+                            continue;
+                        }
+                        if(strcasecmp($x, 'or') === 0) {
+                            $criteria->orWhere($expr->{$condition['operator']}($condition['field'], $condition['value']));
+                        } else {
+                            $criteria->andWhere($expr->{$condition['operator']}($condition['field'], $condition['value']));
+                        }
+                    }
                 }
-                $criteria->andWhere($expr->{$condition['operator']}($condition['field'], $condition['value']));
             }
         }
         return $this->matching($criteria);
+    }
+
+    public function findAllUsersQB(array $conditions = [], array $orderings = [], $result = false)
+    {
+        $where = [];
+        $whereParams = [];
+        if(count($conditions) > 0) {
+            $wherePartials = [];
+            $i = 0;
+            foreach($conditions as $x => $condition_arr) {
+                $wherePartials[$i] = [];
+                if(count($condition_arr) > 0) {
+                    $j = 0;
+                    foreach($condition_arr as $condition) {
+                        if (!is_array($condition) || count($condition) != 3) {
+                            continue;
+                        }
+                        $wherePartials[$i][] = 'u.'.$condition['field'].' '.$this->getOperator($condition['operator']).' :param_'.$i.$j;
+                        $whereParams[':param_'.$i.$j] = $this->getParamValue($condition['operator'], $condition['value']);
+                        $j++;
+                    }
+                    $where[] = '('.implode(' '.strtoupper($x).' ', $wherePartials[$i]).')';
+                }
+                $i++;
+            }
+        }
+        $qb = $this->createQueryBuilder('u');
+        $qb->select('u.id AS id, u.fullname AS fullname, u.username AS username, u.email AS email, u.lastLogin AS lastLogin');
+        /*$qb->select('u, g');
+        $qb->leftJoin('u.groups', 'g');*/
+        if(count($where) > 0) {
+            $qb->where('(' . implode(' AND ', $where) . ')');
+            $qb->setParameters($whereParams);
+        }
+        if($result) {
+            if (count($orderings) > 0) {
+                foreach ($orderings as $ordering) {
+                    $qb->orderBy($this->getSortField($ordering['field']), $this->getSortOrder($ordering['order']));
+                }
+            }
+            return $qb->getQuery()->getArrayResult();
+        }
+        return $qb;
+    }
+
+    private function getOperator($op)
+    {
+        if(strcasecmp($op, 'contains') === 0)
+        {
+            return 'LIKE';
+        }
+        else if(strcasecmp($op, 'eq') === 0)
+        {
+            return '=';
+        }
+        return $op;
+    }
+
+    private function getParamValue($op, $val)
+    {
+        if(strcasecmp($op, 'contains') === 0)
+        {
+            return '%'.$val.'%';
+        }
+        return $val;
+    }
+
+    private function getSortField($field)
+    {
+        if(!in_array($field, $this->sortFields)) {
+            return $this->sortFields[0];
+        }
+        return $field;
+    }
+
+    private function getSortOrder($order)
+    {
+        if(!in_array(strtolower($order), $this->sortOrders)) {
+            return $this->sortOrders[0];
+        }
+        return $order;
+    }
+
+    public function getSortableFields()
+    {
+        return $this->sortFields;
     }
 }

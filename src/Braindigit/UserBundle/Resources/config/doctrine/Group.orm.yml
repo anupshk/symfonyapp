@@ -1,6 +1,7 @@
 Braindigit\UserBundle\Entity\Group:
     type:  entity
     table: fos_group
+    repositoryClass: Braindigit\UserBundle\Entity\GroupRepository
     id:
         id:
             type: integer
