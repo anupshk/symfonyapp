@@ -79,25 +79,65 @@ class UserController extends Controller
         ));
     }
 
-    public function formAction(Request $request)
+    public function formAction(Request $request, $id)
     {
         $formFactory = $this->get('fos_user.registration.form.factory');
         $userManager = $this->get('fos_user.user_manager');
 
-        $user = $userManager->createUser();
-        $user->setEnabled(true);
+        if(empty($id)) {
+            $user = $userManager->createUser();
+            $user->setEnabled(true);
+        } else {
+            $user = $this->getDoctrine()->getRepository('BraindigitUserBundle:User')->find($id);
+            if(!$user) {
+                throw $this->createNotFoundException('User with ID '.$id.' does not exists!');
+            }
+        }
 
         $form = $formFactory->createForm();
+        $roles = $this->getAllRoles();
+        $form->add('roles', 'choice', array(
+            'choices' => $roles,
+            'data' => $user->getRoles(),
+            'label' => 'Roles',
+            'expanded' => true,
+            'multiple' => true,
+            'mapped' => true,
+            'required' => false,
+        ));
+        $form->add('groups', 'entity', array(
+            'label' => 'Groups',
+            'expanded' => true,
+            'multiple' => true,
+            'mapped' => true,
+            'required' => false,
+            'class' => 'Braindigit\UserBundle\Entity\Group',
+            'property' => 'name',
+            'data' => $user->getGroups(),
+        ));
         $form->setData($user);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
+            $user->setRoles($form->getData()->getRoles());
             $userManager->updateUser($user);
             $this->addFlash('success', 'User "'.$user->getUsername().'" saved!');
             return $this->redirectToRoute('braindigit_user_list');
         }
         return $this->render('BraindigitUserBundle:User:form.html.twig', array(
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'id' => $id,
         ));
+    }
+
+    private function getAllRoles()
+    {
+        $roleHierarchy = $this->container->getParameter('security.role_hierarchy.roles');
+        $roles = array_keys($roleHierarchy);
+        $allRoles = [];
+        foreach($roles as $role) {
+            $allRoles[$role] = $role;
+        }
+        return $allRoles;
     }
 }
