@@ -68,6 +68,7 @@
                                 <th class="{% if pagination.isSorted('username') %}sorting_{{ direction }}{% else %}sorting{% endif %}">{{ knp_pagination_sortable(pagination, 'Username', 'username') }}</th>
                                 <th class="{% if pagination.isSorted('email') %}sorting_{{ direction }}{% else %}sorting{% endif %}">{{ knp_pagination_sortable(pagination, 'Email', 'email') }}</th>
                                 <th class="{% if pagination.isSorted('lastLogin') %}sorting_{{ direction }}{% else %}sorting{% endif %}">{{ knp_pagination_sortable(pagination, 'Last login', 'lastLogin') }}</th>
+                                <th>Actions</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -78,6 +79,10 @@
                                     <td>{{ user.username }}</td>
                                     <td>{{ user.email }}</td>
                                     <td>{% if user.lastLogin is not null %}{{ user.lastLogin|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                    <td>
+                                        <a href="{{ path('braindigit_user_form', { id: user.id }) }}"><i class="fa fa-edit"></i></a>
+                                        <a href="{{ path('braindigit_user_form', { id: user.id }) }}"><i class="fa fa-delete"></i></a>
+                                    </td>
                                 </tr>
                             {% endfor %}
                             </tbody>
