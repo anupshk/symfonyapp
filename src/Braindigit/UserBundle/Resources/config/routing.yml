@@ -5,3 +5,7 @@ braindigit_user_homepage:
 braindigit_user_list:
     path:     /admin/users
     defaults: { _controller: BraindigitUserBundle:User:index }
+
+braindigit_user_form:
+    path:     /admin/user/form
+    defaults: { _controller: BraindigitUserBundle:User:form }

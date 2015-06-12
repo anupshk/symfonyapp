@@ -42,11 +42,10 @@
             <div id="userlist_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                 <div class="row">
                     <form method="GET" id="userlistfrm" action="{{ path('braindigit_user_list') }}">
-                        <input type="hidden" name="{{ query_param_sort }}" value="{{ app.request.get(query_param_sort) }}">
-                        <input type="hidden" name="{{ query_param_direction }}" value="{{ app.request.get(query_param_direction) }}">
+                        <input type="hidden" name="{{ query_param_sort }}" value="{{ app.request.get(query_param_sort, list_data.sort_field) }}">
+                        <input type="hidden" name="{{ query_param_direction }}" value="{{ app.request.get(query_param_direction, list_data.sort_direction) }}">
                         <div class="col-sm-6">
                             <div id="example1_length" class="dataTables_length">
-                                {% set rpp_options = [{value:1},{value:10},{value:25},{value:50},{value:100}] %}
                                 <label>Show {{ forms.selectbox('rpp', rpp_options, rpp, 'user_rpp', 'form-control input-sm') }} entries</label>
                             </div>
                         </div>

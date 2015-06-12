@@ -1,0 +1,12 @@
+{% macro flashmessage(type, class) %}
+    <div class="row">
+        <div class="col-md-12">
+            {% for flashMessage in app.session.flashbag.get(type) %}
+                <div class="alert alert-{{ class }} alert-dismissable">
+                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endmacro %}
