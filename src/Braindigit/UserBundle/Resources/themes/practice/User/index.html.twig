@@ -32,6 +32,16 @@
             jQuery('#user_rpp').change(function() {
                 jQuery('form#userlistfrm').submit();
             });
+            jQuery('#btnSearchReset').on('click', function() {
+                jQuery('#user_search').val('');
+                jQuery('form#userlistfrm').submit();
+            });
+            jQuery('.deleteUser').on('click', function(e) {
+                e.preventDefault();
+                if(confirm('Are you sure?')) {
+                    alert("confirmed delete");
+                }
+            });
         });
     </script>
 {% endblock %}
@@ -50,9 +60,12 @@
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="dataTables_filter" id="example1_filter">
-                                <label>Search:<input id="user_search" name="search" value="{{ search }}" class="form-control input-sm" type="text">
-                                </label>
+                            <div class="input-group input-group-sm pull-right">
+                                <input type="text" id="user_search" name="search" value="{{ search }}" placeholder="Search" class="form-control">
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-info btn-flat">Go</button>
+                                    <button type="button" id="btnSearchReset" class="btn btn-danger btn-flat">Clear</button>
+                                </span>
                             </div>
                         </div>
                     </form>
@@ -80,8 +93,8 @@
                                     <td>{{ user.email }}</td>
                                     <td>{% if user.lastLogin is not null %}{{ user.lastLogin|date('Y-m-d H:i:s') }}{% endif %}</td>
                                     <td>
-                                        <a href="{{ path('braindigit_user_form', { id: user.id }) }}"><i class="fa fa-edit"></i></a>
-                                        <a href="{{ path('braindigit_user_form', { id: user.id }) }}"><i class="fa fa-delete"></i></a>
+                                        <span><a href="{{ path('braindigit_user_form', { id: user.id }) }}"><i class="fa fa-edit"></i></a></span>
+                                        <span><a class="deleteUser" href="{{ path('braindigit_user_form', { id: user.id }) }}"><i class="fa fa-trash"></i></a></span>
                                     </td>
                                 </tr>
                             {% endfor %}

@@ -5,6 +5,8 @@ braindigit_user_homepage:
 braindigit_user_list:
     path:     /admin/users
     defaults: { _controller: BraindigitUserBundle:User:index }
+    options:
+        expose: true
 
 braindigit_user_form:
     path:     /admin/user/form/{id}
