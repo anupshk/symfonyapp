@@ -1,0 +1,3 @@
+#braindigit_homepage_homepage:
+#    path:     /hello/{name}
+#    defaults: { _controller: BraindigitHomepageBundle:Default:index }
