@@ -25,7 +25,6 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AppBundle\AppBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-            new Braindigit\DemoBundle\BraindigitDemoBundle(),
             new Braindigit\UserBundle\BraindigitUserBundle(),
             new FM\ElfinderBundle\FMElfinderBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
@@ -42,6 +41,8 @@ class AppKernel extends Kernel
             new Liip\ImagineBundle\LiipImagineBundle(),
             new FOS\CommentBundle\FOSCommentBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new Braindigit\CommonBundle\BraindigitCommonBundle(),
+            new Braindigit\HomepageBundle\BraindigitHomepageBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

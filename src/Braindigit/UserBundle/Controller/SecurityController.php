@@ -19,4 +19,16 @@ class SecurityController extends BaseController
         }
         return parent::loginAction($request);
     }
+
+    public function renderLogin(array $data)
+    {
+        $requestAttributes = $this->container->get('request')->attributes;
+        if ($requestAttributes->get('_route') == 'braindigit_admin_login') {
+            $template = sprintf('BraindigitUserBundle:Backend/Security:login.html.twig');
+        } else {
+            //$template = sprintf('FOSUserBundle:Security:login.html.twig');
+            $template = sprintf('BraindigitUserBundle:Frontend/Security:login.html.twig');
+        }
+        return $this->container->get('templating')->renderResponse($template, $data);
+    }
 }

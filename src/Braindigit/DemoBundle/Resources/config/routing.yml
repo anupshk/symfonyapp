@@ -1,3 +1,0 @@
-braindigit_demo_homepage:
-    path:     /demo
-    defaults: { _controller: BraindigitDemoBundle:Default:index }

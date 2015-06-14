@@ -1,3 +1,27 @@
+site_welcome:
+    path:     /
+    defaults: { _controller: BraindigitHomepageBundle:Frontend/Default:index }
+
+braindigit_homepage:
+    resource: "@BraindigitHomepageBundle/Resources/config/routing.yml"
+    prefix:   /
+
+braindigit_common:
+    resource: "@BraindigitCommonBundle/Resources/config/routing.yml"
+    prefix:   /
+
+braindigit_admin_login:
+    pattern:  /admin/login
+    defaults: { _controller: FOSUserBundle:Security:login }
+
+braindigit_admin_check:
+    pattern:  /admin/login_check
+    defaults: { _controller: FOSUserBundle:Security:check }
+
+braindigit_admin_logout:
+    pattern:  /admin/logout
+    defaults: { _controller: FOSUserBundle:Security:logout }
+
 braindigit_event:
     resource: "@BraindigitEventBundle/Resources/config/routing.yml"
     prefix:   /
@@ -12,10 +36,6 @@ braindigit_page:
 
 braindigit_user:
     resource: "@BraindigitUserBundle/Resources/config/routing.yml"
-    prefix:   /
-
-braindigit_demo:
-    resource: "@BraindigitDemoBundle/Resources/config/routing.yml"
     prefix:   /
 
 fos_user:
@@ -41,6 +61,6 @@ fos_comment_api:
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
-app:
-    resource: "@AppBundle/Controller/"
-    type:     annotation
+#app:
+#    resource: "@AppBundle/Controller/"
+#    type:     annotation

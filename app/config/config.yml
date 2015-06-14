@@ -38,6 +38,7 @@ twig:
         query_param_sort: "%query_param_sort%"
         query_param_direction: "%query_param_direction%"
         rpp_options: [{value:5},{value:10},{value:25},{value:50},{value:100}] #rows per page
+        fos_csrf_provider: "@form.csrf_provider" #for embedded login form
 
 # Assetic Configuration
 assetic:

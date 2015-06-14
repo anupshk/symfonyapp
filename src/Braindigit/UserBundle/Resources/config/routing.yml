@@ -4,12 +4,12 @@ braindigit_user_homepage:
 
 braindigit_user_list:
     path:     /admin/users
-    defaults: { _controller: BraindigitUserBundle:User:index }
+    defaults: { _controller: BraindigitUserBundle:Backend/User:index}
     options:
         expose: true
 
 braindigit_user_form:
     path:     /admin/user/form/{id}
-    defaults: { _controller: BraindigitUserBundle:User:form, id:0 }
+    defaults: { _controller: BraindigitUserBundle:Backend/User:form, id:0 }
     requirements:
         id: \d+
