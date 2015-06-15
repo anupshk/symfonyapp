@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
 <head>
+    <title>{{ application_name }} | {{ application_version }} | {% block title %}Welcome{% endblock %}</title>
     {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="{{ asset('/themes/practice/frontend/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/themes/practice/frontend/font-awesome/css/font-awesome.min.css') }}">

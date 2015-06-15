@@ -7,6 +7,9 @@ Braindigit\UserBundle\Entity\User:
             - NotBlank: ~
             - Length:
                 min: 5
+        profile_picture_file:
+            - File:
+                maxSize: 1M
     id:
         id:
             type: integer
@@ -16,6 +19,10 @@ Braindigit\UserBundle\Entity\User:
         fullname:
             type: string
             length: 255
+        profile_picture:
+            type: string
+            length: 255
+            nullable: TRUE
 
     manyToMany:
         groups:
@@ -28,3 +35,9 @@ Braindigit\UserBundle\Entity\User:
                 inverseJoinColumns:
                     group_id:
                         referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist: [preUpload]
+        preUpdate: [preUpload]
+        postPersist: [upload]
+        postUpdate: [upload]
+        postRemove: [removeUpload]

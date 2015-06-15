@@ -115,6 +115,7 @@ class UserController extends Controller
             'property' => 'name',
             'data' => $user->getGroups(),
         ));
+        $form->add('profile_picture_file','file');
         $form->setData($user);
         $form->handleRequest($request);
 
