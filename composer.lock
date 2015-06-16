@@ -1152,38 +1152,38 @@
         },
         {
             "name": "friendsofsymfony/comment-bundle",
-            "version": "v2.0.6",
+            "version": "v2.0.7",
             "target-dir": "FOS/CommentBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSCommentBundle.git",
-                "reference": "65552ea5142e296d18b3c5b098bf424794726993"
+                "reference": "3c60322b818c8b4a6578d2df574742f9e2554b17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSCommentBundle/zipball/65552ea5142e296d18b3c5b098bf424794726993",
-                "reference": "65552ea5142e296d18b3c5b098bf424794726993",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSCommentBundle/zipball/3c60322b818c8b4a6578d2df574742f9e2554b17",
+                "reference": "3c60322b818c8b4a6578d2df574742f9e2554b17",
                 "shasum": ""
             },
             "require": {
                 "friendsofsymfony/rest-bundle": "~1.0",
                 "jms/serializer-bundle": "~0.11",
                 "php": ">=5.3.2",
-                "symfony/form": "~2.1",
-                "symfony/framework-bundle": "~2.1",
-                "symfony/security-bundle": "~2.1",
-                "symfony/twig-bundle": "~2.1",
-                "symfony/validator": "~2.1",
-                "symfony/yaml": "~2.1"
+                "symfony/form": "~2.3",
+                "symfony/framework-bundle": "~2.3",
+                "symfony/security-bundle": "~2.3",
+                "symfony/twig-bundle": "~2.3",
+                "symfony/validator": "~2.3",
+                "symfony/yaml": "~2.3"
             },
             "require-dev": {
                 "doctrine/doctrine-bundle": "~1.1",
                 "doctrine/orm": "~2.3",
                 "friendsofsymfony/user-bundle": "~1.1",
                 "ornicar/akismet-bundle": "dev-master",
-                "symfony/assetic-bundle": "~2.1",
-                "symfony/browser-kit": "~2.1",
-                "symfony/css-selector": "~2.1",
+                "symfony/assetic-bundle": "~2.3",
+                "symfony/browser-kit": "~2.3",
+                "symfony/css-selector": "~2.3",
                 "symfony/expression-language": "~2.4"
             },
             "suggest": {
@@ -1215,9 +1215,8 @@
                     "homepage": "https://github.com/friendsofsymfony/FOSCommentBundle/contributors"
                 },
                 {
-                    "name": "Alexander",
-                    "email": "iam.asm89@gmail.com",
-                    "homepage": "http://asm89.github.io/"
+                    "name": "Alexander Mols",
+                    "email": "iam.asm89@gmail.com"
                 }
             ],
             "description": "This Bundle provides threaded comment functionality for Symfony2 applications",
@@ -1227,7 +1226,7 @@
                 "forum",
                 "threads"
             ],
-            "time": "2014-07-09 00:21:03"
+            "time": "2015-06-01 11:31:14"
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
@@ -1289,17 +1288,17 @@
         },
         {
             "name": "friendsofsymfony/rest-bundle",
-            "version": "1.6.1",
+            "version": "1.7.0",
             "target-dir": "FOS/RestBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSRestBundle.git",
-                "reference": "46a18702ad7ea33678c50914512ef5bf530e043b"
+                "reference": "bd233aca63b0965171d60fe4c539afa10d45633e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/46a18702ad7ea33678c50914512ef5bf530e043b",
-                "reference": "46a18702ad7ea33678c50914512ef5bf530e043b",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/bd233aca63b0965171d60fe4c539afa10d45633e",
+                "reference": "bd233aca63b0965171d60fe4c539afa10d45633e",
                 "shasum": ""
             },
             "require": {
@@ -1338,7 +1337,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.6-dev"
+                    "dev-master": "1.7-dev"
                 }
             },
             "autoload": {
@@ -1369,7 +1368,7 @@
             "keywords": [
                 "rest"
             ],
-            "time": "2015-06-04 07:49:44"
+            "time": "2015-06-15 08:39:23"
         },
         {
             "name": "friendsofsymfony/user-bundle",
@@ -1377,12 +1376,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "92d5624f2a29e74d8fd9d2a94d7ed7998a8c2809"
+                "reference": "3efbc08a97f218d0a4524dee926fc4381e3d0947"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/92d5624f2a29e74d8fd9d2a94d7ed7998a8c2809",
-                "reference": "92d5624f2a29e74d8fd9d2a94d7ed7998a8c2809",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/3efbc08a97f218d0a4524dee926fc4381e3d0947",
+                "reference": "3efbc08a97f218d0a4524dee926fc4381e3d0947",
                 "shasum": ""
             },
             "require": {
@@ -1436,7 +1435,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2015-05-05 15:08:24"
+            "time": "2015-06-10 08:27:05"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -3522,16 +3521,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.7.0",
+            "version": "v2.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "9975b1eca3de4db792a2c3e4e16f676a4aadcd46"
+                "reference": "932b6e7499c670f4db6d0b871477a4a3ca161e74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/9975b1eca3de4db792a2c3e4e16f676a4aadcd46",
-                "reference": "9975b1eca3de4db792a2c3e4e16f676a4aadcd46",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/932b6e7499c670f4db6d0b871477a4a3ca161e74",
+                "reference": "932b6e7499c670f4db6d0b871477a4a3ca161e74",
                 "shasum": ""
             },
             "require": {
@@ -3640,7 +3639,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2015-05-30 16:52:28"
+            "time": "2015-06-11 21:15:28"
         },
         {
             "name": "twig/extensions",
