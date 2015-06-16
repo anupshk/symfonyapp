@@ -148,6 +148,12 @@ class UserController extends Controller
                 )
             )
         ));
+        if($id > 0) {
+            $form->add('change_password', 'checkbox', array(
+                'required' => false,
+                'mapped' => false,
+            ));
+        }
         $form->setData($user);
         $form->handleRequest($request);
 
