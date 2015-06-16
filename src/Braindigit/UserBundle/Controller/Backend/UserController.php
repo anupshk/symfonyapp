@@ -84,6 +84,7 @@ class UserController extends Controller
         $formFactory = $this->get('fos_user.registration.form.factory');
         $userManager = $this->get('fos_user.user_manager');
         $profile_picture = '';
+        $emptyPassword = false;
 
         if(empty($id)) {
             $user = $userManager->createUser();
@@ -94,6 +95,19 @@ class UserController extends Controller
                 throw $this->createNotFoundException('User with ID '.$id.' does not exists!');
             }
             $profile_picture = $user->getWebProfilePicture();
+            //if form has been submitted
+            if($request->getMethod() === 'POST') {
+                //if no password is entered
+                $formData = $request->request->get('fos_user_registration_form');
+                if(strlen($formData['plainPassword']['first']) === 0 && strlen($formData['plainPassword']['second']) === 0) {
+                    $dummyPass = 'dummy';
+                    $postData = $request->request->all();
+                    $postData['fos_user_registration_form']['plainPassword']['first'] = $dummyPass;
+                    $postData['fos_user_registration_form']['plainPassword']['second'] = $dummyPass;
+                    $request->request->replace($postData);
+                    $emptyPassword = true;
+                }
+            }
         }
 
         $form = $formFactory->createForm();
@@ -138,13 +152,16 @@ class UserController extends Controller
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
+            if($emptyPassword) {
+                $user->setPlainPassword('');
+            }
             $user->setRoles($form->getData()->getRoles());
             $userManager->updateUser($user);
             $this->addFlash('success', 'User "'.$user->getUsername().'" saved!');
             if($request->request->has('save_close')) {
                 return $this->redirectToRoute('braindigit_user_list');
             } else {
-                return $this->redirectToRoute('braindigit_user_form', array('id' => $id));
+                return $this->redirectToRoute('braindigit_user_form', array('id' => $user->getId()));
             }
         }
         return $this->render('BraindigitUserBundle:Backend/User:form.html.twig', array(
