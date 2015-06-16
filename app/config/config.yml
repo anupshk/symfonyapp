@@ -242,3 +242,17 @@ fos_comment:
         model:
             comment: Braindigit\PageBundle\Entity\Comment
             thread: Braindigit\PageBundle\Entity\Thread
+
+liip_imagine:
+    resolvers:
+       default:
+          web_path:
+              web_root: %kernel.root_dir%/../web
+              cache_prefix: cached
+
+    filter_sets:
+        cache: ~
+        userprofile_thumb:
+            quality: 75
+            filters:
+                thumbnail: { size: [120, 90], mode: outbound }

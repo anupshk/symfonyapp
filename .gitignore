@@ -14,3 +14,4 @@
 !/web/uploads/.gitkeep
 /web/assets/*
 !/web/assets/.gitkeep
+/web/cached

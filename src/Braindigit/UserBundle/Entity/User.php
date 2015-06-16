@@ -11,6 +11,7 @@ class User extends BaseUser
 {
     protected $fullname;
     protected $profile_picture;
+    protected $updatedOn;
     private $profile_picture_file;
     private $temporary_file;
 
@@ -28,6 +29,16 @@ class User extends BaseUser
     public function setFullname($fullname)
     {
         $this->fullname = $fullname;
+    }
+
+    public function setUpdatedOn($updatedOn)
+    {
+        $this->updatedOn = $updatedOn;
+    }
+
+    public function getUpdatedOn()
+    {
+        return $this->updatedOn;
     }
 
     /**
@@ -88,12 +99,13 @@ class User extends BaseUser
     {
         // get rid of the __DIR__ so it doesn't screw up
         // when displaying uploaded doc/image in the view.
-        return 'uploads/profile_pictures';
+        return '/uploads/profile_pictures';
     }
 
     public function setProfilePictureFile(UploadedFile $file = null)
     {
         $this->profile_picture_file = $file;
+        $this->updatedOn = new \DateTime();
         // check if we have an old image path
         if (isset($this->profile_picture)) {
             // store the old name to delete after the update

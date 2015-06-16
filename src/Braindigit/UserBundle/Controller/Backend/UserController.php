@@ -2,9 +2,9 @@
 namespace Braindigit\UserBundle\Controller\Backend;
 
 use Braindigit\UserBundle\Entity\User;
-use Braindigit\UserBundle\Form\Type\RegistrationFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints\Image;
 
 class UserController extends Controller
 {
@@ -83,6 +83,7 @@ class UserController extends Controller
     {
         $formFactory = $this->get('fos_user.registration.form.factory');
         $userManager = $this->get('fos_user.user_manager');
+        $profile_picture = '';
 
         if(empty($id)) {
             $user = $userManager->createUser();
@@ -92,6 +93,7 @@ class UserController extends Controller
             if(!$user) {
                 throw $this->createNotFoundException('User with ID '.$id.' does not exists!');
             }
+            $profile_picture = $user->getWebProfilePicture();
         }
 
         $form = $formFactory->createForm();
@@ -115,7 +117,23 @@ class UserController extends Controller
             'property' => 'name',
             'data' => $user->getGroups(),
         ));
-        $form->add('profile_picture_file','file');
+        $form->add('profile_picture_file', 'file', array(
+            'label' => 'Profile picture',
+            'required' => false,
+            'constraints' => array(
+                new Image(
+                    array(
+                        'maxSize' => '1M',
+                        /*'minWidth' => '200',
+                        'maxWidth' => '400',
+                        'minHeight' => '200',
+                        'maxHeight' => '400',
+                        'allowLandscape' => false,
+                        'allowPortrait' => false*/
+                    )
+                )
+            )
+        ));
         $form->setData($user);
         $form->handleRequest($request);
 
@@ -123,11 +141,16 @@ class UserController extends Controller
             $user->setRoles($form->getData()->getRoles());
             $userManager->updateUser($user);
             $this->addFlash('success', 'User "'.$user->getUsername().'" saved!');
-            return $this->redirectToRoute('braindigit_user_list');
+            if($request->request->has('save_close')) {
+                return $this->redirectToRoute('braindigit_user_list');
+            } else {
+                return $this->redirectToRoute('braindigit_user_form', array('id' => $id));
+            }
         }
         return $this->render('BraindigitUserBundle:Backend/User:form.html.twig', array(
             'form' => $form->createView(),
             'id' => $id,
+            'profile_picture' => $profile_picture,
         ));
     }
 
