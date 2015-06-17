@@ -1,22 +1,17 @@
 <?php
 namespace Braindigit\UserBundle\Controller\Backend;
 
+use Braindigit\CommonBundle\Controller\CommonController;
 use Braindigit\UserBundle\Entity\User;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints\Image;
 
-class UserController extends Controller
+class UserController extends CommonController
 {
     public function indexAction(Request $request)
     {
-        $list_data = [];
-        $list_data['sort_field'] = 'id';
-        $list_data['sort_direction'] = 'ASC';
-        $list_data['rpp'] = 10;
-
-        $rpp = $request->query->get('rpp', $list_data['rpp']);
-        $search = $request->query->get('search','');
+        $filtering = $this->getFiltering($request);
+        $search = $filtering['search'];
 
         $criteria = [];
         if(mb_strlen($search) > 0) {
@@ -52,8 +47,8 @@ class UserController extends Controller
         }
         $orderings = [
             [
-                'field' => $request->query->getAlpha($this->container->getParameter('query_param_sort'), 'id'),
-                'order' => $request->query->getAlpha($this->container->getParameter('query_param_direction'), 'desc')
+                'field' => $filtering['sort_field'],
+                'order' => $filtering['sort_direction']
             ]
         ];
         $limit = null;
@@ -63,8 +58,8 @@ class UserController extends Controller
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $usersQB->getQuery(),
-            $request->query->getInt('page', 1),
-            $request->query->getInt('rpp', $rpp),
+            $filtering['page'],
+            $filtering['rpp'],
             array(
                 'defaultSortFieldName' => $orderings[0]['field'],
                 'defaultSortDirection' => $orderings[0]['order'],
@@ -73,8 +68,8 @@ class UserController extends Controller
         );
         return $this->render('BraindigitUserBundle:Backend/User:index.html.twig', array(
             'pagination' => $pagination,
-            'list_data' => $list_data,
-            'rpp' => $rpp,
+            'list_data' => $filtering,
+            'rpp' => $filtering['rpp'],
             'search' => $search
         ));
     }
