@@ -23,7 +23,8 @@ class SecurityController extends BaseController
     public function renderLogin(array $data)
     {
         $requestAttributes = $this->container->get('request')->attributes;
-        if ($requestAttributes->get('_route') == 'braindigit_admin_login') {
+        if (($requestAttributes->get('_route') == 'braindigit_admin_login') ||
+            ($requestAttributes->get('_route') == 'braindigit_admin_main')) {
             $template = sprintf('BraindigitUserBundle:Backend/Security:login.html.twig');
         } else {
             //$template = sprintf('FOSUserBundle:Security:login.html.twig');

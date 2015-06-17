@@ -78,12 +78,20 @@
                                 </div>
                             </div>
                         {% endif %}
-                        <div id="password1" {% if id >0 %}style="display:none;"{% endif %} class="form-group{% if form.plainPassword.first.vars.errors|length %} has-error{% endif %}">
+                        {% set first_password_error = 0 %}
+                        {% set second_password_error = 0 %}
+                        {% if form.plainPassword.first.vars.errors|length %}
+                            {% set first_password_error = 1 %}
+                        {% endif %}
+                        {% if form.plainPassword.second.vars.errors|length %}
+                            {% set second_password_error = 1 %}
+                        {% endif %}
+                        <div id="password1" {% if (id > 0) and (first_password_error == 0) and (second_password_error == 0) %}style="display:none;"{% endif %} class="form-group{% if first_password_error == 1 %} has-error{% endif %}">
                             {{ form_label(form.plainPassword.first) }}
                             {{ form_widget(form.plainPassword.first, { 'attr': { 'class': 'form-control', 'placeholder': 'form.password'|trans({}, 'FOSUserBundle') } }) }}
                             {{ form_errors(form.plainPassword.first) }}
                         </div>
-                        <div id="password2" {% if id >0 %}style="display:none;"{% endif %} class="form-group{% if form.plainPassword.second.vars.errors|length %} has-error{% endif %}">
+                        <div id="password2" {% if (id > 0) and (second_password_error == 0) and (first_password_error == 0) %}style="display:none;"{% endif %} class="form-group{% if second_password_error == 1 %} has-error{% endif %}">
                             {{ form_label(form.plainPassword.second) }}
                             {{ form_widget(form.plainPassword.second, { 'attr': { 'class': 'form-control', 'placeholder': 'form.password_confirmation'|trans({}, 'FOSUserBundle') } }) }}
                             {{ form_errors(form.plainPassword.second) }}
