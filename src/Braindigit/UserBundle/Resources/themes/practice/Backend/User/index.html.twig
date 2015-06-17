@@ -39,7 +39,8 @@
             jQuery('.deleteUser').on('click', function(e) {
                 e.preventDefault();
                 if(confirm('Are you sure?')) {
-                    alert("confirmed delete");
+                    jQuery('#delete_user_id').val(jQuery(this).attr('data-id'));
+                    jQuery('form#userdelfrm').submit();
                 }
             });
         });
@@ -51,6 +52,10 @@
         <div class="box-body">
             <div id="userlist_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                 <div class="row">
+                    {% set queryParams = app.request.query.all %}
+                    <form method="POST" id="userdelfrm" action="{{ path('braindigit_user_delete', queryParams) }}">
+                        <input type="hidden" name="id" id="delete_user_id" value="0">
+                    </form>
                     <form method="GET" id="userlistfrm" action="{{ path('braindigit_user_list') }}">
                         <input type="hidden" name="{{ query_param_sort }}" value="{{ app.request.get(query_param_sort, list_data.sort_field) }}">
                         <input type="hidden" name="{{ query_param_direction }}" value="{{ app.request.get(query_param_direction, list_data.sort_direction) }}">
@@ -94,7 +99,7 @@
                                     <td>{% if user.lastLogin is not null %}{{ user.lastLogin|date('Y-m-d H:i:s') }}{% endif %}</td>
                                     <td>
                                         <span><a href="{{ path('braindigit_user_form', { id: user.id }) }}"><i class="fa fa-edit"></i></a></span>
-                                        <span><a class="deleteUser" href="{{ path('braindigit_user_form', { id: user.id }) }}"><i class="fa fa-trash"></i></a></span>
+                                        <span><a class="deleteUser" data-id="{{ user.id }}" href="#"><i class="fa fa-trash"></i></a></span>
                                     </td>
                                 </tr>
                             {% endfor %}

@@ -45,7 +45,7 @@
 {% block page_header %}Add/Edit User{% endblock %}
 {% block main_content %}
     <div class="row">
-        <form novalidate="novalidate" action="{{ path('braindigit_user_form', { id: id }) }}" {{ form_enctype(form) }} method="POST">
+        <form novalidate="novalidate" action="{{ path('braindigit_user_form', { id: id }) }}" enctype="multipart/form-data" method="POST">
             <div class="col-md-6">
                 <!-- basic information -->
                 <div class="box box-primary">

@@ -13,3 +13,8 @@ braindigit_user_form:
     defaults: { _controller: BraindigitUserBundle:Backend/User:form, id:0 }
     requirements:
         id: \d+
+
+braindigit_user_delete:
+    path:     /admin/user/delete
+    defaults: { _controller: BraindigitUserBundle:Backend/User:delete }
+    methods:  [POST]

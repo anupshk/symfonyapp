@@ -192,4 +192,27 @@ class UserController extends Controller
         }
         return $allRoles;
     }
+
+    public function deleteAction(Request $request)
+    {
+        $params = $request->query->all();
+        $id = $request->request->getInt('id');
+        if($id == $this->getUser()->getId()) {
+            $this->addFlash('error', 'Cannot delete self!');
+            return $this->redirectToRoute('braindigit_user_list', $params);
+        }
+        if($id > 0) {
+            $user = $this->getDoctrine()->getRepository('BraindigitUserBundle:User')->find($id);
+            if(!$user) {
+                throw $this->createNotFoundException('User with ID '.$id.' does not exists!');
+            }
+            $deleted_user = $user->getUsername();
+            $userManager = $this->get('fos_user.user_manager');
+            $userManager->deleteUser($user);
+            $this->addFlash('success', 'User "'.$deleted_user.'" deleted!');
+            return $this->redirectToRoute('braindigit_user_list', $params);
+        }
+        $this->addFlash('error', 'Error deleting user with id '.$id);
+        return $this->redirectToRoute('braindigit_user_list', $params);
+    }
 }
