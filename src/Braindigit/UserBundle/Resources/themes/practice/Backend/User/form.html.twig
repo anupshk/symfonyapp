@@ -102,6 +102,11 @@
                                 <div class="top-offset-2 bottom-offset-5">
                                     <img src="{{ profile_picture | imagine_filter('userprofile_thumb') }}" />
                                 </div>
+                                <div class="checkbox">
+                                    <label>
+                                        {{ form_widget(form.remove_profile_picture) }} Remove
+                                    </label>
+                                </div>
                             {% endif %}
                             {% if form.profile_picture_file.vars.errors|length %}
                                 <div class="alert alert-error">

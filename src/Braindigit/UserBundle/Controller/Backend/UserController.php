@@ -153,6 +153,11 @@ class UserController extends Controller
                 'required' => false,
                 'mapped' => false,
             ));
+            if(!empty($profile_picture)) {
+                $form->add('remove_profile_picture', 'checkbox', array(
+                    'required' => false,
+                ));
+            }
         }
         $form->setData($user);
         $form->handleRequest($request);

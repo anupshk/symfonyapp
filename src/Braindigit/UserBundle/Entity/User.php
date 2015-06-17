@@ -12,6 +12,7 @@ class User extends BaseUser
     protected $fullname;
     protected $profile_picture;
     protected $updatedOn;
+    protected $remove_profile_picture;
     private $profile_picture_file;
     private $temporary_file;
 
@@ -127,6 +128,14 @@ class User extends BaseUser
             // do whatever you want to generate a unique name
             $filename = sha1(uniqid(mt_rand(), true));
             $this->profile_picture = $filename.'.'.$this->getProfilePictureFile()->guessExtension();
+        } else {
+            //check if user wants to remove current profile picture
+            $current_pp = $this->getAbsoluteProfilePicture();
+            if(!empty($this->remove_profile_picture) && !empty($current_pp)) {
+                $this->profile_picture = null;
+                if(is_file($current_pp))
+                    unlink($current_pp);
+            }
         }
     }
 
@@ -157,5 +166,18 @@ class User extends BaseUser
         if ($file) {
             unlink($file);
         }
+    }
+
+    public function getRemoveProfilePicture()
+    {
+        return $this->remove_profile_picture;
+    }
+
+    public function setRemoveProfilePicture($remove_profile_picture)
+    {
+        if(!empty($remove_profile_picture)) {
+            $this->updatedOn = new \DateTime();
+        }
+        $this->remove_profile_picture = $remove_profile_picture;
     }
 }
