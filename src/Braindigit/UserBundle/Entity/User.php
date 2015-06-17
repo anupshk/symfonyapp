@@ -13,6 +13,7 @@ class User extends BaseUser
     protected $profile_picture;
     protected $updatedOn;
     protected $remove_profile_picture;
+    protected $old_profile_picture;
     private $profile_picture_file;
     private $temporary_file;
 
@@ -110,6 +111,9 @@ class User extends BaseUser
         // check if we have an old image path
         if (isset($this->profile_picture)) {
             // store the old name to delete after the update
+            if(!empty($this->profile_picture)) {
+                $this->old_profile_picture = $this->getWebProfilePicture();
+            }
             $this->temporary_file = $this->profile_picture;
             $this->profile_picture = null;
         } else {
@@ -132,6 +136,8 @@ class User extends BaseUser
             //check if user wants to remove current profile picture
             $current_pp = $this->getAbsoluteProfilePicture();
             if(!empty($this->remove_profile_picture) && !empty($current_pp)) {
+                //save in old profile picture for cacheimage listener
+                $this->old_profile_picture = $this->getWebProfilePicture();
                 $this->profile_picture = null;
                 if(is_file($current_pp))
                     unlink($current_pp);
@@ -179,5 +185,10 @@ class User extends BaseUser
             $this->updatedOn = new \DateTime();
         }
         $this->remove_profile_picture = $remove_profile_picture;
+    }
+
+    public function getOldProfilePicture()
+    {
+        return $this->old_profile_picture;
     }
 }
