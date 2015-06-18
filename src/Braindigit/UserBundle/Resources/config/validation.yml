@@ -3,7 +3,15 @@ Braindigit\UserBundle\Entity\User:
     fullname:
       - NotBlank: ~
       - Length:
-          min: 2
+          min: 5
           max: 200
           minMessage: "Your name must be at least {{ limit }} characters length"
           maxMessage: "Your name cannot be longer than {{ limit }} characters length"
+    username:
+      - NotBlank: ~
+      - Length:
+          min: 3
+    plainPassword:
+      - NotBlank: ~
+      - Length:
+          min: 5

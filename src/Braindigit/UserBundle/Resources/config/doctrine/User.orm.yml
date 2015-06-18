@@ -2,10 +2,6 @@ Braindigit\UserBundle\Entity\User:
     type:  entity
     table: fos_user
     repositoryClass: Braindigit\UserBundle\Entity\UserRepository
-    properties:
-        fullname:
-            - NotBlank: { groups: [Registration, Default] }
-            - Length: { min: 5, groups: [Registration, Default] }
     id:
         id:
             type: integer
