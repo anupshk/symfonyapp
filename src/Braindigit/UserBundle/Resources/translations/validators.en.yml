@@ -1,0 +1,5 @@
+braindigit_user:
+    fullname:
+        blank: Please enter a fullname
+        short: "Your name must be at least {{ limit }} characters length"
+        long: "Your name cannot be longer than {{ limit }} characters length"

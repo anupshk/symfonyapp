@@ -1,17 +1,17 @@
 Braindigit\UserBundle\Entity\User:
   properties:
     fullname:
-      - NotBlank: ~
+      - NotBlank: { message: "braindigit_user.fullname.blank" }
       - Length:
           min: 5
           max: 200
-          minMessage: "Your name must be at least {{ limit }} characters length"
-          maxMessage: "Your name cannot be longer than {{ limit }} characters length"
+          minMessage: "braindigit_user.fullname.short"
+          maxMessage: "braindigit_user.fullname.long"
     username:
-      - NotBlank: ~
       - Length:
           min: 3
+          max: 15
     plainPassword:
-      - NotBlank: ~
       - Length:
           min: 5
+          minMessage: ~
