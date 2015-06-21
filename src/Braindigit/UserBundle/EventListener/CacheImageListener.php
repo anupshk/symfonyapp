@@ -18,7 +18,10 @@ class CacheImageListener
     {
         $entity = $args->getEntity();
         if($entity instanceof User) {
-            $this->cacheManager->remove($entity->getOldProfilePicture(), $this->filter);
+            $img = $entity->getOldProfilePicture();
+            if(!empty($img)) {
+                $this->cacheManager->remove($img, $this->filter);
+            }
         }
     }
 
@@ -26,7 +29,10 @@ class CacheImageListener
     {
         $entity = $args->getEntity();
         if($entity instanceof User) {
-            $this->cacheManager->remove($entity->getWebProfilePicture(), $this->filter);
+            $img = $entity->getAbsoluteProfilePicture();
+            if(file_exists($img) && is_file($img)) {
+                $this->cacheManager->remove($entity->getWebProfilePicture(), $this->filter);
+            }
         }
     }
 }

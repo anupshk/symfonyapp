@@ -3,3 +3,11 @@ braindigit_user:
         blank: Please enter a fullname
         short: "Your name must be at least {{ limit }} characters length"
         long: "Your name cannot be longer than {{ limit }} characters length"
+    username:
+        blank: Please enter a username
+        short: "Your username must be at least {{ limit }} characters length"
+        long: "Your username cannot be longer than {{ limit }} characters length"
+    password:
+        blank: Please enter a password
+        short: "Your password must be at least {{ limit }} characters length"
+        long: "Your password cannot be longer than {{ limit }} characters length"

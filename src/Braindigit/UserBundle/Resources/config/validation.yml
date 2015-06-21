@@ -11,7 +11,9 @@ Braindigit\UserBundle\Entity\User:
       - Length:
           min: 3
           max: 15
+          minMessage: "braindigit_user.username.short"
+          maxMessage: "braindigit_user.username.long"
     plainPassword:
       - Length:
           min: 5
-          minMessage: ~
+          minMessage: "braindigit_user.password.short"
