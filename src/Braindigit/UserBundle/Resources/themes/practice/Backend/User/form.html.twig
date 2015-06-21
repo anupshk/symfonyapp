@@ -53,6 +53,7 @@
                         <h3 class="box-title">Basic Information</h3>
                     </div><!-- /.box-header -->
                     {{ form_row(form._token) }}
+                    {{ form_widget(form.xterms) }}
                     <div class="box-body">
                         <div class="form-group{% if form.fullname.vars.errors|length %} has-error{% endif %}">
                             {{ form_label(form.fullname) }}

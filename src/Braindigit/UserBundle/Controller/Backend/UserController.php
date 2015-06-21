@@ -107,6 +107,11 @@ class UserController extends CommonController
 
         $form = $formFactory->createForm();
         $roles = $this->getAllRoles();
+        //TODO : whats the alternative for terms and conditions ?
+        $form->add('xterms', 'hidden', array(
+            'mapped' => false,
+            'data' => 1,
+        ));
         $form->add('roles', 'choice', array(
             'choices' => $roles,
             'data' => $user->getRoles(),

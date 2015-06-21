@@ -37,7 +37,7 @@
                     <div class="col-xs-8">
                         <div class="checkbox icheck">
                             <label>
-                                <input type="checkbox"> I agree to the <a href="#">terms</a>
+                                {{ form_widget(form.xterms) }} I agree to the <a href="#">terms</a>
                             </label>
                         </div>
                     </div><!-- /.col -->
@@ -45,6 +45,13 @@
                         <button type="submit" class="btn btn-primary btn-block btn-flat">{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}</button>
                     </div><!-- /.col -->
                 </div>
+                {% if form.xterms.vars.errors|length %}
+                    <div class="row">
+                        <div class="alert alert-error">
+                            {{ form_errors(form.xterms) }}
+                        </div>
+                    </div>
+                {% endif %}
             </form>
             {#
             <div class="social-auth-links text-center">

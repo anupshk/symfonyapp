@@ -11,3 +11,5 @@ braindigit_user:
         blank: Please enter a password
         short: "Your password must be at least {{ limit }} characters length"
         long: "Your password cannot be longer than {{ limit }} characters length"
+    xterms:
+        require: Please accept the terms and conditions.
