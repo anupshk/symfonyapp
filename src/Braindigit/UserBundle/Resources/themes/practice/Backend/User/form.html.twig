@@ -42,7 +42,13 @@
 {% endblock %}
 
 {% block title %}User Form{% endblock %}
-{% block page_header %}Add/Edit User{% endblock %}
+{% block page_header %}
+    {% if id > 0 %}
+        {{ "Edit User"|trans }}
+    {% else %}
+        {{ "Add User"|trans }}
+    {% endif %}
+{% endblock %}
 {% block main_content %}
     <div class="row">
         <form novalidate="novalidate" action="{{ path('braindigit_user_form', { id: id }) }}" enctype="multipart/form-data" method="POST">

@@ -1,0 +1,107 @@
+{% extends 'BraindigitCommonBundle::Backend/layout.html.twig' %}
+{% import 'BraindigitCommonBundle::Backend/macros.html.twig' as forms %}
+
+{% block title %}Groups{% endblock %}
+{% block page_header %}Groups{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('/themes/practice/backend/adminlte/plugins/datatables/dataTables.bootstrap.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery('#group_search').keypress(function(e) {
+                if(e.which == 13) {
+                    jQuery('form#grouplistfrm').submit();
+                    return false;
+                }
+            });
+            jQuery('#group_rpp').change(function() {
+                jQuery('form#grouplistfrm').submit();
+            });
+            jQuery('#btnSearchReset').on('click', function() {
+                jQuery('#group_search').val('');
+                jQuery('form#grouplistfrm').submit();
+            });
+            jQuery('.deleteGroup').on('click', function(e) {
+                e.preventDefault();
+                if(confirm('Are you sure?')) {
+                    jQuery('#delete_group_id').val(jQuery(this).attr('data-id'));
+                    jQuery('form#groupdelfrm').submit();
+                }
+            });
+        });
+    </script>
+{% endblock %}
+{% block main_content %}
+
+    <div class="box">
+        <div class="box-body">
+            <div id="grouplist_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                <div class="row">
+                    {% set queryParams = app.request.query.all %}
+                    <form method="POST" id="groupdelfrm" action="{{ path('braindigit_group_delete', queryParams) }}">
+                        <input type="hidden" name="id" id="delete_group_id" value="0">
+                    </form>
+                    <form method="GET" id="grouplistfrm" action="{{ path('braindigit_group_list') }}">
+                        <input type="hidden" name="{{ query_param_sort }}" value="{{ app.request.get(query_param_sort, list_data.sort_field) }}">
+                        <input type="hidden" name="{{ query_param_direction }}" value="{{ app.request.get(query_param_direction, list_data.sort_direction) }}">
+                        <div class="col-sm-6">
+                            <div id="example1_length" class="dataTables_length">
+                                <label>Show {{ forms.selectbox('rpp', rpp_options, rpp, 'group_rpp', 'form-control input-sm') }} entries</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="input-group input-group-sm pull-right">
+                                <input type="text" id="group_search" name="search" value="{{ search }}" placeholder="Search" class="form-control">
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-info btn-flat">Go</button>
+                                    <button type="button" id="btnSearchReset" class="btn btn-danger btn-flat">Clear</button>
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table id="usersList" class="table table-bordered table-striped dataTable">
+                            <thead>
+                            <tr>
+                                {% set direction = pagination.getDirection() %}
+                                <th class="{% if pagination.isSorted('id') %}sorting_{{ direction }}{% else %}sorting{% endif %}">{{ knp_pagination_sortable(pagination, 'Id', 'id') }}</th>
+                                <th class="{% if pagination.isSorted('name') %}sorting_{{ direction }}{% else %}sorting{% endif %}">{{ knp_pagination_sortable(pagination, 'Name', 'name') }}</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for group in pagination %}
+                                <tr>
+                                    <td>{{ group.id }}</td>
+                                    <td>{{ group.name }}</td>
+                                    <td>
+                                        <span><a href="{{ path('braindigit_group_form', { id: group.id }) }}"><i class="fa fa-edit"></i></a></span>
+                                        <span><a class="deleteGroup" data-id="{{ group.id }}" href="#"><i class="fa fa-trash"></i></a></span>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-5">
+                        <div aria-live="polite" role="status" id="grouplist_info" class="dataTables_info">
+                            Total : {{ pagination.getTotalItemCount }}
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="dataTables_paginate paging_simple_numbers" id="grouplist_paginate">
+                            {{ knp_pagination_render(pagination) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.box-body -->
+    </div><!-- /.box -->
+{% endblock %}

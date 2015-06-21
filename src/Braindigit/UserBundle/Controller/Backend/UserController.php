@@ -182,17 +182,6 @@ class UserController extends CommonController
         ));
     }
 
-    private function getAllRoles()
-    {
-        $roleHierarchy = $this->container->getParameter('security.role_hierarchy.roles');
-        $roles = array_keys($roleHierarchy);
-        $allRoles = [];
-        foreach($roles as $role) {
-            $allRoles[$role] = $role;
-        }
-        return $allRoles;
-    }
-
     public function deleteAction(Request $request)
     {
         $params = $request->query->all();

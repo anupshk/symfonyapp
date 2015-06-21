@@ -191,4 +191,11 @@ class User extends BaseUser
     {
         return $this->old_profile_picture;
     }
+
+    public function getDefaultProfilePicture()
+    {
+        return null === $this->profile_picture
+            ? '/bundles/braindigitcommon/images/userprofile.jpg'
+            : $this->getUploadDir().'/'.$this->profile_picture;
+    }
 }

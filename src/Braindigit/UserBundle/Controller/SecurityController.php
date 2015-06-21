@@ -12,7 +12,7 @@ class SecurityController extends BaseController
         $securityAuthChecker = $this->container->get('security.authorization_checker');
         $router = $this->container->get('router');
         if($securityAuthChecker->isGranted('ROLE_ADMIN') === true) {
-            return new RedirectResponse($router->generate('braindigit_demo_homepage'));
+            return new RedirectResponse($router->generate('braindigit_user_list'));
         }
         if($securityAuthChecker->isGranted('ROLE_USER') === true) {
             return new RedirectResponse($router->generate('fos_user_profile_show'));

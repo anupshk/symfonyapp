@@ -31,6 +31,7 @@ Braindigit\UserBundle\Entity\User:
                 inverseJoinColumns:
                     group_id:
                         referencedColumnName: id
+                        onDelete: CASCADE
     lifecycleCallbacks:
         prePersist: [preUpload]
         preUpdate: [preUpload]

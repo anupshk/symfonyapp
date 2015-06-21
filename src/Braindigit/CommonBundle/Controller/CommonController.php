@@ -37,4 +37,15 @@ class CommonController extends Controller
 
         return $data;
     }
+
+    protected function getAllRoles()
+    {
+        $roleHierarchy = $this->container->getParameter('security.role_hierarchy.roles');
+        $roles = array_keys($roleHierarchy);
+        $allRoles = [];
+        foreach($roles as $role) {
+            $allRoles[$role] = $role;
+        }
+        return $allRoles;
+    }
 }

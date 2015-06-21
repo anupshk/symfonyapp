@@ -10,11 +10,28 @@ braindigit_user_list:
 
 braindigit_user_form:
     path:     /admin/user/form/{id}
-    defaults: { _controller: BraindigitUserBundle:Backend/User:form, id:0 }
+    defaults: { _controller: BraindigitUserBundle:Backend/User:form, id: 0 }
     requirements:
         id: \d+
 
 braindigit_user_delete:
     path:     /admin/user/delete
     defaults: { _controller: BraindigitUserBundle:Backend/User:delete }
+    methods:  [POST]
+
+braindigit_group_list:
+    path:     /admin/groups
+    defaults: { _controller: BraindigitUserBundle:Backend/Group:index }
+    options:
+        expose: true
+
+braindigit_group_form:
+    path:     /admin/group/form/{id}
+    defaults: { _controller: BraindigitUserBundle:Backend/Group:form, id: 0 }
+    requirements:
+        id: \d+
+
+braindigit_group_delete:
+    path:     /admin/group/delete
+    defaults: { _controller: BraindigitUserBundle:Backend/Group:delete }
     methods:  [POST]

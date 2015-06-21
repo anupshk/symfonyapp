@@ -256,3 +256,7 @@ liip_imagine:
             quality: 75
             filters:
                 thumbnail: { size: [120, 90], mode: outbound }
+        adminprofile_thumb:
+            quality: 75
+            filters:
+                thumbnail: { size: [160, 160], mode: outbound }

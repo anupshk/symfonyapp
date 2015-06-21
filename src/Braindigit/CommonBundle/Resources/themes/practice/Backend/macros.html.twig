@@ -10,3 +10,15 @@
         </div>
     </div>
 {% endmacro %}
+
+{% macro selectbox(name, options, selected, id, class) %}
+    <select class="{{ class }}" id="{{ id }}" name="{{name}}">
+        {% for option in options %}
+            {% if option.value == selected %}
+                <option value="{{option.value}}" selected>{{ option.value }}</option>
+            {% else %}
+                <option value="{{option.value}}">{{ option.value }}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
+{% endmacro %}
