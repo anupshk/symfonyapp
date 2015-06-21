@@ -3,7 +3,7 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome {{ app.user.fullname }}<b class="caret"></b></a>
         <ul class="dropdown-menu">
             <li align="center" class="well">
-                <div><img class="img-responsive" style="padding:2%;" src="{{ app.user.webProfilePicture | imagine_filter('userprofile_thumb') }}"/><a class="change" href="{{ path('fos_user_profile_edit') }}">Change Picture</a></div>
+                <div><img class="img-responsive" style="padding:2%;" src="{{ app.user.defaultProfilePicture | imagine_filter('userprofile_thumb') }}"/><a class="change" href="{{ path('fos_user_profile_edit') }}">Change Picture</a></div>
                 <a href="{{ path('fos_user_profile_show') }}" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-user"></span> Profile</a>
                 <a href="{{ path('fos_user_security_logout') }}" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
             </li>
