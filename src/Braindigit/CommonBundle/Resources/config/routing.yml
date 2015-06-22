@@ -1,3 +1,6 @@
 #braindigit_common_homepage:
 #    path:     /hello/{name}
 #    defaults: { _controller: BraindigitCommonBundle:Default:index }
+braindigit_common_elfinder:
+    path: /admin/elfinder/{instance}/{homeFolder}
+    defaults: { _controller: FMElfinderBundle:ElFinder:show, instance: standalone, homeFolder: '' }

@@ -1,0 +1,36 @@
+{% extends 'BraindigitCommonBundle::Backend/layout.html.twig' %}
+{% block title %}Media{% endblock %}
+{% block page_header %}Media Browser{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ prefix }}/jquery-ui/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css">
+    <link href="{{ prefix }}/elfinder/css/elfinder.min.css" rel="stylesheet" type="text/css">
+    <link href="{{ prefix }}/elfinder/css/theme.css" rel="stylesheet" type="text/css">
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ prefix }}/jquery-ui/jquery-ui.min.js"></script>
+    <script src="{{ prefix }}/elfinder/js/elfinder.min.js"></script>
+    <script src="{{ prefix }}/elfinder/js/i18n/elfinder.{{locale}}.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        $().ready(function() {
+            var $f = $('.elfinder').elfinder({
+                url : '{{path('ef_connect', { 'instance': instance, 'homeFolder': homeFolder } )}}',
+                lang : '{{locale}}'
+            });
+
+            {% if fullscreen %}
+            var $window = $(window);
+            $window.resize(function(){
+                var $win_height = $window.height();
+                if( $f.height() != $win_height ){
+                    $f.height($win_height).resize();
+                }
+            });
+            {% endif %}
+        });
+    </script>
+{% endblock %}
+{% block main_content %}
+    <div class="elfinder"></div>
+{% endblock %}
