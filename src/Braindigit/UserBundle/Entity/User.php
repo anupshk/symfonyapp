@@ -12,6 +12,7 @@ class User extends BaseUser
     protected $fullname;
     protected $profile_picture;
     protected $updatedOn;
+    protected $registeredOn;
     protected $remove_profile_picture;
     protected $old_profile_picture;
     private $profile_picture_file;
@@ -197,5 +198,15 @@ class User extends BaseUser
         return null === $this->profile_picture
             ? '/bundles/braindigitcommon/images/userprofile.jpg'
             : $this->getUploadDir().'/'.$this->profile_picture;
+    }
+
+    public function getRegisteredOn()
+    {
+        return $this->registeredOn;
+    }
+
+    public function setRegisteredOnValue()
+    {
+        $this->registeredOn = new \DateTime();
     }
 }

@@ -19,6 +19,10 @@ Braindigit\UserBundle\Entity\User:
             type: datetime
             nullable: TRUE
             column: updated_on
+        registeredOn:
+              type: datetime
+              nullable: TRUE
+              column: registered_on
 
     manyToMany:
         groups:
@@ -33,7 +37,7 @@ Braindigit\UserBundle\Entity\User:
                         referencedColumnName: id
                         onDelete: CASCADE
     lifecycleCallbacks:
-        prePersist: [preUpload]
+        prePersist: [setRegisteredOnValue, preUpload]
         preUpdate: [preUpload]
         postPersist: [upload]
         postUpdate: [upload]
