@@ -43,6 +43,8 @@ class AppKernel extends Kernel
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Braindigit\CommonBundle\BraindigitCommonBundle(),
             new Braindigit\HomepageBundle\BraindigitHomepageBundle(),
+            new Braindigit\ApiBundle\BraindigitApiBundle(),
+            new \Nelmio\ApiDocBundle\NelmioApiDocBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

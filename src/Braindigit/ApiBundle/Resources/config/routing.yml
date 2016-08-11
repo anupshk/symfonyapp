@@ -1,0 +1,3 @@
+braindigit_api_default:
+    type: rest
+    resource: Braindigit\ApiBundle\Controller\DefaultController

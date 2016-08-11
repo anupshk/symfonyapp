@@ -1,3 +1,11 @@
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc
+
+braindigit_api:
+    resource: "@BraindigitApiBundle/Resources/config/routing.yml"
+    prefix:   /api
+
 site_welcome:
     path:     /
     defaults: { _controller: BraindigitHomepageBundle:Frontend/Default:index }

@@ -15,7 +15,7 @@ services:
 
     braindigit_user.user_manager:
         class: Braindigit\UserBundle\Doctrine\UserManager
-        arguments: [@security.encoder_factory, @fos_user.util.username_canonicalizer, @fos_user.util.email_canonicalizer, @fos_user.entity_manager, %fos_user.model.user.class%]
+        arguments: [@security.encoder_factory, @fos_user.util.username_canonicalizer, @fos_user.util.email_canonicalizer, @fos_user.object_manager, %fos_user.model.user.class%]
 
     braindigit_user.cacheimage_listener:
         class: Braindigit\UserBundle\EventListener\CacheImageListener
