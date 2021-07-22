@@ -1,4 +1,4 @@
-symfonyapp
+DEPRECATED
 ==========
 
-A Symfony project created on May 20, 2015, 4:21 pm.
+Test app to try out Symfony 2 components
